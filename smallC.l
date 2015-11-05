@@ -33,79 +33,76 @@ int linecount = 1;
 }
 
  /* reserved type name */ 
-struct 			{return STRUCT;}
-return	 		{return RETURN;}
-if 			{return IF;}
-else 			{return ELSE;}
-break	 		{return BREAK;}
-continue 		{return CONT;}
-for			{return FOR;}
-int 			{return TYPE;} // ONLY int
-0[xX][0-9a-fA-F]+ 	{return INT;} // hex integer
-0[0-7]*			{return INT;} // oct integer 
-[1-9][0-9]* 		{return INT;} // comman integer  
-			{return ID;}
+struct 			printf("STRUCT");//{return STRUCT;}
+return	 		printf("RETURN");//{return RETURN;}
+if 			printf("IF");//{return IF;}
+else 			printf("ELSE");//{return ELSE;}
+break	 		printf("BREAK");//{return BREAK;}
+continue 		printf("CONT");//{return CONT;}
+for			printf("FOR");//{return FOR;}
+int 			printf("TYPE");//{return TYPE;} // ONLY int
+0[xX][0-9a-fA-F]+ 	printf("INT");//{return INT;} // hex integer
+0[0-7]*			printf("INT");//{return INT;} // oct integer 
+[1-9][0-9]* 		printf("INT");//{return INT;} // comman integer  
+[a-zA-Z_][a-zA-Z0-9_]*	printf("ID");//{return ID;}
 
-";" {return SEMI;}
-"," {return COMMA;}
+";" 			printf("SEMI");//{return SEMI;}
+"," 			printf("COMMA");//{return COMMA;}
  /* 1 */
-"." {return DOT;} // element selection, Precedence 1
-		// "." is left alone,outside the binary operator
-		// "[]", "()" are not used in the grammar
+"."			printf("DOT");//{return DOT;} 
  /* 2 */
-"-" {return MINUS;} // binary  4 or unary 2
-"!" {return LOGNOT;}
-"++" {return PREINC;}
-"--" {return PREDEC;}
-"~" {return BITNOT;}
+"-" 			printf("MINUS");//{return MINUS;} // binary  4 or unary 2
+"!" 			printf("LOGNOT");//{return LOGNOT;}
+"++" 			printf("PREINC");//{return PLUSPLUS;}
+"--" 			printf("IF");//{return MINUSMINUS;}
+"~" 			printf("BITNOT");//{return BITNOT;}
  /* 3 */
-"*" {return MUL;}
-"/" {return DIV;}
-"%" {return MOD;}
+"*" 			printf("MUL");//{return MUL;}
+"/" 			printf("DIV");//{return DIV;}
+"%" 			printf("MOD");//{return MOD;}
  /* 4 */ 
-"+" {return PLUS;}
+"+" 			printf("PLUS");//{return PLUS;}
  /* 5 */
-"<<" {return LEFT;}
-">>" {return RIGHT;}
+"<<" 			printf("SHL");//{return SHL;}
+">>" 			printf("SHR");//{return SHR;}
  /* 6 */
-">" {return GR_OP;}
-"<" {return LE_OP;}
-">=" {return NL_OP;}
-"<=" {return NG_OP;}
+">" 			printf("GR_OP");//{return GR_OP;}
+"<" 			printf("LE_OP");//{return LE_OP;}
+">=" 			printf("NL_OP");//{return NL_OP;}
+"<=" 			printf("NG_OP");//{return NG_OP;}
  /* 7 */
-"==" {return EQU;}
-"!=" {return NEQ;}
+"==" 			printf("EQU");//{return EQU;}
+"!=" 			printf("NEQ");//{return NEQ;}
  /* 8 */
-"&" {return BITAND;}
+"&" 			printf("BITAND");//{return BITAND;}
  /* 9 */
-"^" {return BITXOR;}
+"^" 			printf("BITXOR");//{return BITXOR;}
  /* 10 */
-"|" {return BITOR;}
+"|" 			printf("BITOR");//{return BITOR;}
  /* 11 */
-"&&" {return LOGAND;};
+"&&" 			printf("LOGAND");//{return LOGAND;};
  /* 12 */
-"||" {return LOGOR;}
+"||" 			printf("LOGOR");//{return LOGOR;}
  /* 13 */
-"="  {return ASSIGNOP;}
-"+=" {return PLUS_ASSIGN;}
-"-=" {return MINUS_ASSIGN;}
-"*=" {return MUL_ASSIGN;}
-"/=" {return DIV_ASSIGN;}
-"&=" {return AND_ASSIGN;}
-"^=" {return XOR_ASSIGN;}
-"|=" {return OR_ASSIGN;}
-"<<=" {return LEFT_ASSIGN;}
-">>=" {return RIGHT_ASSIGN;}
- /* not operand */
-"(" {return LP;}
-")" {return RP;}
-"[" {return LB;}
-"]" {return RB;}
-"{" {return LC;}
-"}" {return RC;}
+"="  			printf("ASSIGN_OP");//{return ASSIGN_OP;}
+"+=" 			printf("PLUS_ASSIGN");//{return PLUS_ASSIGN;}
+"-=" 			printf("MINUS_ASSIGN");//{return MINUS_ASSIGN;}
+"*=" 			printf("MUL_ASSIGN");//{return MUL_ASSIGN;}
+"/=" 			printf("DIV_ASSIGN");//{return DIV_ASSIGN;}
+"&=" 			printf("AND_ASSIGN");//{return AND_ASSIGN;}
+"^=" 			printf("XOR_ASSIGN");//{return XOR_ASSIGN;}
+"|=" 			printf("OR_ASSIGN");//{return OR_ASSIGN;}
+"<<=" 			printf("SHL_ASSIGN");//{return SHL_ASSIGN;}
+">>=" 			printf("SHR_ASSIGN");//{return SHR_ASSIGN;}
+ /* brances */
+"(" 			printf("LP");//{return LP;}
+")" 			printf("RP");//{return RP;}
+"[" 			printf("LB");//{return LB;}
+"]"		 	printf("RB");//{return RB;}
+"{" 			printf("LC");//{return LC;}
+"}" 			printf("RC");//{return RC;}
 
-[ \t\r] ; // SKIPPING
-\/\*(.*\n)*.*\*\/ ; // skip comment
+[ \t\r] ; 		// SKIPPING
 
 . {
  printf("UNKNOWN CHARCTER %c", yytext[0]);
