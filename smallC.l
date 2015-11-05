@@ -1,35 +1,50 @@
 %{
 /*
+/ Filename : smallC.l
+/ Output File : lex.yy.c
 / @author : Shen Bingyu
 / @date : 2015.11.1	
 */
-#include <stdio.h>
-#include <stdlib.h> 
+#include "smallC.tab.h"
+
 #include <yy.tab.h>
+#include "includes.h"
+int linecount = 1;
+
+
+
+
+
 %}
 
-alpha [_a-zA-Z]
-hex [0-9a-fA-F]
-oct [0-7]
-digit [0-9]
+%x comment
+
+%option noywarp
+%option yylineno
+%option nounput
 
 %%
-
-[\n] {yylineno++;}
+"/*"		BEGIN(comment);
+<comment>{
+[^*\n]*  	/* anything but '*' */
+"*"+[^\/\n]* 	/* '*' not followed by '/' */
+\n		/* new line */
+"*"+"/" 	BEGIN(INITIAL);
+}
 
  /* reserved type name */ 
-"struct" {return STRUCT;}
-"return" {return RETURN;}
-"if" {return IF;}
-"else" {return ELSE;}
-"break" {return BREAK;}
-"continue" {return CONT;}
-"for" {return FOR;}
-"int" {return TYPE;} // ONLY int
-0[xX]({hex})* {return HEXINT;} // hex integer
-0({oct})* {return OCTINT;} // oct integer 
-[digit]+ {return COMINT;} // comman integer  
-{alpha}({alpha}|{digit})* {return ID;}
+struct 			{return STRUCT;}
+return	 		{return RETURN;}
+if 			{return IF;}
+else 			{return ELSE;}
+break	 		{return BREAK;}
+continue 		{return CONT;}
+for			{return FOR;}
+int 			{return TYPE;} // ONLY int
+0[xX][0-9a-fA-F]+ 	{return INT;} // hex integer
+0[0-7]*			{return INT;} // oct integer 
+[1-9][0-9]* 		{return INT;} // comman integer  
+			{return ID;}
 
 ";" {return SEMI;}
 "," {return COMMA;}
