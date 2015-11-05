@@ -7,7 +7,7 @@
 */
 #include "smallC.tab.h"
 
-#include <yy.tab.h>
+//#include <yy.tab.h>
 #include "includes.h"
 int linecount = 1;
 
@@ -20,14 +20,14 @@ int linecount = 1;
 %x comment
 
 %option noywarp
-%option yylineno
+%option yylineno 
 %option nounput
 
 %%
 "/*"		BEGIN(comment);
 <comment>{
 [^*\n]*  	/* anything but '*' */
-"*"+[^\/\n]* 	/* '*' not followed by '/' */
+"*"+[^*/\n]* 	/* '*' not followed by '/' */
 \n		/* new line */
 "*"+"/" 	BEGIN(INITIAL);
 }
@@ -101,14 +101,9 @@ int 			printf("TYPE");//{return TYPE;} // ONLY int
 "]"		 	printf("RB");//{return RB;}
 "{" 			printf("LC");//{return LC;}
 "}" 			printf("RC");//{return RC;}
-
+[\n]			{++linecount;printf("\n%d",linecount);}
 [ \t\r] ; 		// SKIPPING
-
-. {
- printf("UNKNOWN CHARCTER %c", yytext[0]);
- return UNKNOWN;	
-};/* ignore bad characters */  
-
+"//"(.)*		{}/*comment for one line*/
 %%
 
 int main(int argc, char** argv) {
