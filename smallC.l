@@ -5,23 +5,19 @@
 / @author : Shen Bingyu
 / @date : 2015.11.1	
 */
-#include "smallC.tab.h"
+//#include "smallC.tab.h"
 
 //#include <yy.tab.h>
 #include "includes.h"
 int linecount = 1;
 
 
-
-
-
 %}
 
 %x comment
 
-%option noywarp
 %option yylineno 
-%option nounput
+
 
 %%
 "/*"		BEGIN(comment);
@@ -105,9 +101,13 @@ int 			printf("TYPE");//{return TYPE;} // ONLY int
 [ \t\r] ; 		// SKIPPING
 "//"(.)*		{}/*comment for one line*/
 %%
+yywrap()
+{
 
-int main(int argc, char** argv) {
+}
+int main(int argc, char** argv) 
+{
     yylex();
-    ffloush(yyout);
+    //ffloush(yyout);
     exit(0);
 }
