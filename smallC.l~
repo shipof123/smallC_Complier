@@ -80,7 +80,7 @@ int 			printf("TYPE");//{return TYPE;} // ONLY int
  /* 12 */
 "||" 			printf("LOGOR");//{return LOGOR;}
  /* 13 */
-"="  			printf("ASSIGN_OP");//{return ASSIGN_OP;}
+"="  			printf("ASSIGN_");//{return ASSIGN;}
 "+=" 			printf("PLUS_ASSIGN");//{return PLUS_ASSIGN;}
 "-=" 			printf("MINUS_ASSIGN");//{return MINUS_ASSIGN;}
 "*=" 			printf("MUL_ASSIGN");//{return MUL_ASSIGN;}
@@ -108,6 +108,6 @@ yywrap()
 int main(int argc, char** argv) 
 {
     yylex();
-    ffloush(yyout);
+    //ffloush(yyout);
     exit(0);
 }

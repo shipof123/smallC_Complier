@@ -62,10 +62,10 @@ int 			printf("TYPE");//{return TYPE;} // ONLY int
 "<<" 			printf("SHL");//{return SHL;}
 ">>" 			printf("SHR");//{return SHR;}
  /* 6 */
-">" 			printf("GR_OP");//{return GR_OP;}
-"<" 			printf("LE_OP");//{return LE_OP;}
-">=" 			printf("NL_OP");//{return NL_OP;}
-"<=" 			printf("NG_OP");//{return NG_OP;}
+">" 			printf("GT");//{return GT;}
+"<" 			printf("LT");//{return LT;}
+">=" 			printf("GE");//{return GE;}
+"<=" 			printf("LE");//{return LE;}
  /* 7 */
 "==" 			printf("EQU");//{return EQU;}
 "!=" 			printf("NEQ");//{return NEQ;}
@@ -80,7 +80,7 @@ int 			printf("TYPE");//{return TYPE;} // ONLY int
  /* 12 */
 "||" 			printf("LOGOR");//{return LOGOR;}
  /* 13 */
-"="  			printf("ASSIGN_OP");//{return ASSIGN_OP;}
+"="  			printf("ASSIGN_");//{return ASSIGN;}
 "+=" 			printf("PLUS_ASSIGN");//{return PLUS_ASSIGN;}
 "-=" 			printf("MINUS_ASSIGN");//{return MINUS_ASSIGN;}
 "*=" 			printf("MUL_ASSIGN");//{return MUL_ASSIGN;}
