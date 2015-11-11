@@ -888,287 +888,287 @@ BEGIN(INITIAL);
 case 6:
 YY_RULE_SETUP
 #line 32 "smallC.l"
-printf("STRUCT");//{return STRUCT;}
+{return STRUCT;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 33 "smallC.l"
-printf("RETURN");//{return RETURN;}
+{return RETURN;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 34 "smallC.l"
-printf("IF");//{return IF;}
+{return IF;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 35 "smallC.l"
-printf("ELSE");//{return ELSE;}
+{return ELSE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 36 "smallC.l"
-printf("BREAK");//{return BREAK;}
+{return BREAK;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 37 "smallC.l"
-printf("CONT");//{return CONT;}
+{return CONT;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 38 "smallC.l"
-printf("FOR");//{return FOR;}
+{return FOR;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 39 "smallC.l"
-printf("TYPE");//{return TYPE;} // ONLY int
+{return TYPE;} // ONLY int
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 40 "smallC.l"
-printf("INT");//{return INT;} // hex integer
+{return INT;} // hex integer
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 41 "smallC.l"
-printf("INT");//{return INT;} // oct integer 
+{return INT;} // oct integer 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 42 "smallC.l"
-printf("INT");//{return INT;} // comman integer  
+{return INT;} // comman integer  
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 43 "smallC.l"
-printf("ID");//{return ID;}
+{return ID;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 45 "smallC.l"
-printf("SEMI");//{return SEMI;}
+{return SEMI;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 46 "smallC.l"
-printf("COMMA");//{return COMMA;}
+{return COMMA;}
 	YY_BREAK
 /* 1 */
 case 20:
 YY_RULE_SETUP
 #line 48 "smallC.l"
-printf("DOT");//{return DOT;} 
+{return DOT;} 
 	YY_BREAK
 /* 2 */
 case 21:
 YY_RULE_SETUP
 #line 50 "smallC.l"
-printf("MINUS");//{return MINUS;} // binary  4 or unary 2
+{return MINUS;} // binary  4 or unary 2
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 51 "smallC.l"
-printf("LOGNOT");//{return LOGNOT;}
+{return LOGNOT;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 52 "smallC.l"
-printf("PREINC");//{return PLUSPLUS;}
+{return PLUSPLUS;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 53 "smallC.l"
-printf("IF");//{return MINUSMINUS;}
+{return MINUSMINUS;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 54 "smallC.l"
-printf("BITNOT");//{return BITNOT;}
+{return BITNOT;}
 	YY_BREAK
 /* 3 */
 case 26:
 YY_RULE_SETUP
 #line 56 "smallC.l"
-printf("MUL");//{return MUL;}
+{return MUL;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 57 "smallC.l"
-printf("DIV");//{return DIV;}
+{return DIV;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 58 "smallC.l"
-printf("MOD");//{return MOD;}
+{return MOD;}
 	YY_BREAK
 /* 4 */ 
 case 29:
 YY_RULE_SETUP
 #line 60 "smallC.l"
-printf("PLUS");//{return PLUS;}
+{return PLUS;}
 	YY_BREAK
 /* 5 */
 case 30:
 YY_RULE_SETUP
 #line 62 "smallC.l"
-printf("SHL");//{return SHL;}
+{return SHL;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 63 "smallC.l"
-printf("SHR");//{return SHR;}
+{return SHR;}
 	YY_BREAK
 /* 6 */
 case 32:
 YY_RULE_SETUP
 #line 65 "smallC.l"
-printf("GR_OP");//{return GR_OP;}
+{return GT;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 66 "smallC.l"
-printf("LE_OP");//{return LE_OP;}
+{return LT;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 67 "smallC.l"
-printf("NL_OP");//{return NL_OP;}
+{return GE;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 68 "smallC.l"
-printf("NG_OP");//{return NG_OP;}
+{return LE;}
 	YY_BREAK
 /* 7 */
 case 36:
 YY_RULE_SETUP
 #line 70 "smallC.l"
-printf("EQU");//{return EQU;}
+{return EQU;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 71 "smallC.l"
-printf("NEQ");//{return NEQ;}
+{return NEQ;}
 	YY_BREAK
 /* 8 */
 case 38:
 YY_RULE_SETUP
 #line 73 "smallC.l"
-printf("BITAND");//{return BITAND;}
+{return BITAND;}
 	YY_BREAK
 /* 9 */
 case 39:
 YY_RULE_SETUP
 #line 75 "smallC.l"
-printf("BITXOR");//{return BITXOR;}
+{return BITXOR;}
 	YY_BREAK
 /* 10 */
 case 40:
 YY_RULE_SETUP
 #line 77 "smallC.l"
-printf("BITOR");//{return BITOR;}
+{return BITOR;}
 	YY_BREAK
 /* 11 */
 case 41:
 YY_RULE_SETUP
 #line 79 "smallC.l"
-printf("LOGAND");//{return LOGAND;};
+{return LOGAND;};
 	YY_BREAK
 /* 12 */
 case 42:
 YY_RULE_SETUP
 #line 81 "smallC.l"
-printf("LOGOR");//{return LOGOR;}
+{return LOGOR;}
 	YY_BREAK
 /* 13 */
 case 43:
 YY_RULE_SETUP
 #line 83 "smallC.l"
-printf("ASSIGN_OP");//{return ASSIGN_OP;}
+{return ASSIGNOP;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 84 "smallC.l"
-printf("PLUS_ASSIGN");//{return PLUS_ASSIGN;}
+{return PLUS_ASSIGN;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 85 "smallC.l"
-printf("MINUS_ASSIGN");//{return MINUS_ASSIGN;}
+{return MINUS_ASSIGN;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 86 "smallC.l"
-printf("MUL_ASSIGN");//{return MUL_ASSIGN;}
+{return MUL_ASSIGN;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 87 "smallC.l"
-printf("DIV_ASSIGN");//{return DIV_ASSIGN;}
+{return DIV_ASSIGN;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 88 "smallC.l"
-printf("AND_ASSIGN");//{return AND_ASSIGN;}
+{return AND_ASSIGN;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 89 "smallC.l"
-printf("XOR_ASSIGN");//{return XOR_ASSIGN;}
+{return XOR_ASSIGN;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 90 "smallC.l"
-printf("OR_ASSIGN");//{return OR_ASSIGN;}
+{return OR_ASSIGN;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 91 "smallC.l"
-printf("SHL_ASSIGN");//{return SHL_ASSIGN;}
+{return SHL_ASSIGN;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 92 "smallC.l"
-printf("SHR_ASSIGN");//{return SHR_ASSIGN;}
+{return SHR_ASSIGN;}
 	YY_BREAK
 /* brances */
 case 53:
 YY_RULE_SETUP
 #line 94 "smallC.l"
-printf("LP");//{return LP;}
+{return LP;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 95 "smallC.l"
-printf("RP");//{return RP;}
+{return RP;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 96 "smallC.l"
-printf("LB");//{return LB;}
+{return LB;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 97 "smallC.l"
-printf("RB");//{return RB;}
+{return RB;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 98 "smallC.l"
-printf("LC");//{return LC;}
+p{return LC;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 99 "smallC.l"
-printf("RC");//{return RC;}
+{return RC;}
 	YY_BREAK
 case 59:
 /* rule 59 can match eol */
 YY_RULE_SETUP
 #line 100 "smallC.l"
-{++linecount;printf("\n%d",linecount);}
+{++linecount;/*printf("\n%d",linecount);*/}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP

@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+class A
+{
+private:
+	int dat;
+public:
+	A(){dat = 0;}
+	int fuck(){ cout << dat <<endl;}
+};
+class B
+	: public A
+{
+private:
+
+public:
+	int fuck(){cout << 2 <<endl;}
+
+};
+int main()
+{
+	A* a = new B;
+	a->fuck();
+	return 0;
+}

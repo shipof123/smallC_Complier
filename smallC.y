@@ -3,25 +3,41 @@
 // @date : 2015.11.01
 // The syntax analysis part.
 
+#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 #include "node.h"
-//#include <string>
+#include <string>
+#include <vector>
+using namespace std;
 
-//Node* syntax_tree;
-
-union{
-	int node;
+extern "C"{
+	void yyerror(const char *s);
+	extern int yylex(void);
 }
-void yyerror(const char *s);
+extern int linecount; // get the line number
+//extern int charcount;
+extern char* yytext; // get the token
+
+
+struct Node;
+struct Var_ArrayDeclarationInfo;
+
+Node* program;
 
 FILE* yyin;
 FILE* yyout;
 
 %}
 
+%union{
+	int n_int_t;
+	string* n_id_t;
+	Node* node;
+	vector<Node*>* n_nodeVector;
+	struct 
+	
+}
 %type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
 
 
@@ -35,9 +51,9 @@ FILE* yyout;
 %token BREAK CONT
 %token FOR
 %token LC RC
-%token ASSIGN PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN LOGOR LOGAND BITOR BITXOR BITAND EQU NEQ GT LT GE LE SHL SHR PLUS MINUS MUL DIV MOD LOGNOT MINUSMINUS PLUSPLUS BITNOT LP RP LB RB DOT
+%token ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN LOGOR LOGAND BITOR BITXOR BITAND EQU NEQ GT LT GE LE SHL SHR PLUS MINUS MUL DIV MOD LOGNOT MINUSMINUS PLUSPLUS BITNOT LP RP LB RB DOT
 
-%right ASSIGN PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN
+%right ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN
 %left LOGOR
 %left LOGAND
 %left BITOR
@@ -82,9 +98,11 @@ VAR 		: ID
 		;
 FUNC		: ID LP PARAS RP
 		;
-PARAS		: PARA COMMA PARAS
-		| PARA
-		| /* empty */		
+PARAS		: PARASF
+		| /* empty */
+		;	
+PARASF		: PARA COMMA PARASF
+		| PARA	
 		;
 PARA		: SPEC VAR
 		;
@@ -97,7 +115,7 @@ STMT		: EXP SEMI
 		| STMTBLOCK
 		| RETURN EXP SEMI
 		| IF LP EXP RP STMT ESTMT
-		| FOR LP FEXP SEMI FEXP SEMI FEXP RP STMT
+		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT
 		| CONT SEMI
 		| BREAK SEMI
 		;
@@ -113,7 +131,7 @@ DECS		: DEC COMMA DECS
 		| DEC
 		;
 DEC 		: VAR
-		| VAR ASSIGN INIT
+		| VAR ASSIGNOP INIT
 		;
 INIT 		: EXP
 		| LC ARGS RC
@@ -139,7 +157,7 @@ EXP 		: EXP MUL EXP
 		| EXP BITXOR EXP
 		| EXP LOGAND EXP
 		| EXP LOGOR EXP
-		| EXP ASSGIN EXP
+		| EXP ASSIGNOP EXP
 		| EXP PLUS_ASSIGN EXP
 		| EXP MINUS_ASSIGN EXP
 		| EXP MUL_ASSIGN EXP

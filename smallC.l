@@ -11,7 +11,16 @@
 #include "includes.h"
 int linecount = 1;
 
+extern "C"
+{
+	int yylex(void);
+}
 
+void update_loc()
+{
+	yylloc.first_line = linecount;
+}
+#define YY_USER_ACTION update_loc();
 %}
 
 %x comment
@@ -41,6 +50,8 @@ int 			{return TYPE;} // ONLY int
 0[0-7]*			{return INT;} // oct integer 
 [1-9][0-9]* 		{return INT;} // comman integer  
 [a-zA-Z_][a-zA-Z0-9_]*	{return ID;}
+read			{return READ;}
+write			{return WRITE;}
 
 ";" 			{return SEMI;}
 "," 			{return COMMA;}
@@ -80,7 +91,8 @@ int 			{return TYPE;} // ONLY int
  /* 12 */
 "||" 			{return LOGOR;}
  /* 13 */
-"="  			{return ASSIGN;}
+"="  			{return ASSIGNOP
+;}
 "+=" 			{return PLUS_ASSIGN;}
 "-=" 			{return MINUS_ASSIGN;}
 "*=" 			{return MUL_ASSIGN;}

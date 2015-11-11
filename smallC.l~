@@ -80,7 +80,8 @@ int 			{return TYPE;} // ONLY int
  /* 12 */
 "||" 			{return LOGOR;}
  /* 13 */
-"="  			{return ASSIGN;}
+"="  			{return ASSIGNOP
+;}
 "+=" 			{return PLUS_ASSIGN;}
 "-=" 			{return MINUS_ASSIGN;}
 "*=" 			{return MUL_ASSIGN;}
