@@ -29,75 +29,75 @@ int linecount = 1;
 }
 
  /* reserved type name */ 
-struct 			printf("STRUCT");//{return STRUCT;}
-return	 		printf("RETURN");//{return RETURN;}
-if 			printf("IF");//{return IF;}
-else 			printf("ELSE");//{return ELSE;}
-break	 		printf("BREAK");//{return BREAK;}
-continue 		printf("CONT");//{return CONT;}
-for			printf("FOR");//{return FOR;}
-int 			printf("TYPE");//{return TYPE;} // ONLY int
-0[xX][0-9a-fA-F]+ 	printf("INT");//{return INT;} // hex integer
-0[0-7]*			printf("INT");//{return INT;} // oct integer 
-[1-9][0-9]* 		printf("INT");//{return INT;} // comman integer  
-[a-zA-Z_][a-zA-Z0-9_]*	printf("ID");//{return ID;}
+struct 			{return STRUCT;}
+return	 		{return RETURN;}
+if 			{return IF;}
+else 			{return ELSE;}
+break	 		{return BREAK;}
+continue 		{return CONT;}
+for			{return FOR;}
+int 			{return TYPE;} // ONLY int
+0[xX][0-9a-fA-F]+ 	{return INT;} // hex integer
+0[0-7]*			{return INT;} // oct integer 
+[1-9][0-9]* 		{return INT;} // comman integer  
+[a-zA-Z_][a-zA-Z0-9_]*	{return ID;}
 
-";" 			printf("SEMI");//{return SEMI;}
-"," 			printf("COMMA");//{return COMMA;}
+";" 			{return SEMI;}
+"," 			{return COMMA;}
  /* 1 */
-"."			printf("DOT");//{return DOT;} 
+"."			{return DOT;} 
  /* 2 */
-"-" 			printf("MINUS");//{return MINUS;} // binary  4 or unary 2
-"!" 			printf("LOGNOT");//{return LOGNOT;}
-"++" 			printf("PREINC");//{return PLUSPLUS;}
-"--" 			printf("IF");//{return MINUSMINUS;}
-"~" 			printf("BITNOT");//{return BITNOT;}
+"-" 			{return MINUS;} // binary  4 or unary 2
+"!" 			{return LOGNOT;}
+"++" 			{return PLUSPLUS;}
+"--" 			{return MINUSMINUS;}
+"~" 			{return BITNOT;}
  /* 3 */
-"*" 			printf("MUL");//{return MUL;}
-"/" 			printf("DIV");//{return DIV;}
-"%" 			printf("MOD");//{return MOD;}
+"*" 			{return MUL;}
+"/" 			{return DIV;}
+"%" 			{return MOD;}
  /* 4 */ 
-"+" 			printf("PLUS");//{return PLUS;}
+"+" 			{return PLUS;}
  /* 5 */
-"<<" 			printf("SHL");//{return SHL;}
-">>" 			printf("SHR");//{return SHR;}
+"<<" 			{return SHL;}
+">>" 			{return SHR;}
  /* 6 */
-">" 			printf("GT");//{return GT;}
-"<" 			printf("LT");//{return LT;}
-">=" 			printf("GE");//{return GE;}
-"<=" 			printf("LE");//{return LE;}
+">" 			{return GT;}
+"<" 			{return LT;}
+">=" 			{return GE;}
+"<=" 			{return LE;}
  /* 7 */
-"==" 			printf("EQU");//{return EQU;}
-"!=" 			printf("NEQ");//{return NEQ;}
+"==" 			{return EQU;}
+"!=" 			{return NEQ;}
  /* 8 */
-"&" 			printf("BITAND");//{return BITAND;}
+"&" 			{return BITAND;}
  /* 9 */
-"^" 			printf("BITXOR");//{return BITXOR;}
+"^" 			{return BITXOR;}
  /* 10 */
-"|" 			printf("BITOR");//{return BITOR;}
+"|" 			{return BITOR;}
  /* 11 */
-"&&" 			printf("LOGAND");//{return LOGAND;};
+"&&" 			{return LOGAND;};
  /* 12 */
-"||" 			printf("LOGOR");//{return LOGOR;}
+"||" 			{return LOGOR;}
  /* 13 */
-"="  			printf("ASSIGN_");//{return ASSIGN;}
-"+=" 			printf("PLUS_ASSIGN");//{return PLUS_ASSIGN;}
-"-=" 			printf("MINUS_ASSIGN");//{return MINUS_ASSIGN;}
-"*=" 			printf("MUL_ASSIGN");//{return MUL_ASSIGN;}
-"/=" 			printf("DIV_ASSIGN");//{return DIV_ASSIGN;}
-"&=" 			printf("AND_ASSIGN");//{return AND_ASSIGN;}
-"^=" 			printf("XOR_ASSIGN");//{return XOR_ASSIGN;}
-"|=" 			printf("OR_ASSIGN");//{return OR_ASSIGN;}
-"<<=" 			printf("SHL_ASSIGN");//{return SHL_ASSIGN;}
-">>=" 			printf("SHR_ASSIGN");//{return SHR_ASSIGN;}
+"="  			{return ASSIGN;}
+"+=" 			{return PLUS_ASSIGN;}
+"-=" 			{return MINUS_ASSIGN;}
+"*=" 			{return MUL_ASSIGN;}
+"/=" 			{return DIV_ASSIGN;}
+"&=" 			{return AND_ASSIGN;}
+"^=" 			{return XOR_ASSIGN;}
+"|=" 			{return OR_ASSIGN;}
+"<<=" 			{return SHL_ASSIGN;}
+">>=" 			{return SHR_ASSIGN;}
  /* brances */
-"(" 			printf("LP");//{return LP;}
-")" 			printf("RP");//{return RP;}
-"[" 			printf("LB");//{return LB;}
-"]"		 	printf("RB");//{return RB;}
-"{" 			printf("LC");//{return LC;}
-"}" 			printf("RC");//{return RC;}
-[\n]			{++linecount;printf("\n%d",linecount);}
+"(" 			{return LP;}
+")" 			{return RP;}
+"[" 			{return LB;}
+"]"		 	{return RB;}
+"{" 			p{return LC;}
+"}" 			{return RC;}
+[\n]			{++linecount;/*printf("\n%d",linecount);*/}
 [ \t\r] ; 		// SKIPPING
 "//"(.)*		{}/*comment for one line*/
 %%

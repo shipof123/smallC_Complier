@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include "node.h"
+#include "node.h"
 //#include <string>
 
 //Node* syntax_tree;
@@ -22,7 +22,7 @@ FILE* yyout;
 
 %}
 
-%type<node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
+%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
 
 
 %token INT 
@@ -97,7 +97,7 @@ STMT		: EXP SEMI
 		| STMTBLOCK
 		| RETURN EXP SEMI
 		| IF LP EXP RP STMT ESTMT
-		| FOR LP EXP SEMI EXP SEMI EXP RP STMT
+		| FOR LP FEXP SEMI FEXP SEMI FEXP RP STMT
 		| CONT SEMI
 		| BREAK SEMI
 		;
@@ -117,6 +117,9 @@ DEC 		: VAR
 		;
 INIT 		: EXP
 		| LC ARGS RC
+		;
+FEXP:		:EXP
+		| /* empty */
 		;
 EXP 		: EXP MUL EXP
 		| EXP DIV EXP
@@ -157,7 +160,6 @@ EXP 		: EXP MUL EXP
 		| ID ARRS
 		| EXP DOT ID
 		| INT
-		| /* empty */
 		;
 ARRS 		: LB EXP RB ARRS
 		| /* empty */
