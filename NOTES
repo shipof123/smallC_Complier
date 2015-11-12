@@ -3,3 +3,4 @@
 1， EXP 在If_exp 和 Return_exp中不能为空， 修改为两种 FEXP 和 EXP
 2， 函数的返回值，在EXTDEF中 FUNC 的返回值只能是TYPE，所以将返回值修改为 TYPE
 3， 对于PARAS的改变，使不会出现（id,)的情况
+4， 对于EXTVARS的修改，不会出现 int a,; 的情况

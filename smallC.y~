@@ -20,16 +20,19 @@ Node* root;
 	char* string;
 }
 %type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARASF PARA
-%type <node> STMTBLOCK STMT ESTMT DEFS DEF DECS INIT FEXP EXP ARRS ARGS
+%type <node> STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT FEXP EXP ARRS ARGS
 
 %token <string> INT 
 %token <string> ID
 %token SEMI COMMA
 %token <string> TYPE
 %token <string> STRUCT
-%token <string> RETURN IF ELSE BREAK CONT FOR
+%token <string> RETURN IF ELSE BREAK CONT FOR READ WRITE
 %token LC RC
 %token <string> ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN LOGOR LOGAND BITOR BITXOR BITAND EQU NEQ GT LT GE LE SHL SHR PLUS MINUS MUL DIV MOD LOGNOT MINUSMINUS PLUSPLUS BITNOT LP RP LB RB DOT
+
+%nonassoc LOWER_ELSE
+%nonassoc ELSE
 
 %right ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN
 %left LOGOR
@@ -52,20 +55,20 @@ Node* root;
 %%
 PROGRAM		: EXTDEFS 			{root = $$ = new Node(yylineno, Program, "PROGRAM",1,$1);}
 		;
-EXTDEFS		: EXTDEF EXTDEFS		{$$ = new Node(yylineno, Extdefs, "EXTDEFS", 2,$1,$2);}
-		| /* empty */  			{$$ = new Node(yylineno, Null, "NULL", 2,$1,$2);}
+EXTDEFS		: EXTDEF EXTDEFS		{$$ = new Node(yylineno, Extdefs, "EXTDEFS", 2, $1,$2);}
+		| /* empty */  			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 EXTDEF		: SPEC EXTVARS SEMI		{$$ = new Node(yylineno, Extdef, "EXTDEF", 2,$1,$2);}
 		| SPEC FUNC STMTBLOCK		{$$ = new Node(yylineno, Extdef, "EXTDEF", 3,$1,$2,$3);}
 		;
-EXTVARS		: DEC				{$$ = new Node(yylineno, Extvars, "EXTVARS", 1,$1);}
-		| DEC COMMA EXTVARS		{$$ = new Node(yylineno, Extvars, "EXTVARS", 2,$1,$3);}
+EXTVARS		: DEC				{$$ = new Node(yylineno, Extvars, "EXTVARS", 1, $1);}
+		| DEC COMMA EXTVARS		{$$ = new Node(yylineno, Extvars, "EXTVARS", 2, $1, $3);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 SPEC 		: TYPE				{$$ = new Node(yylineno, Spec, "SPEC", 1, new Node(yylineno, Type, $1,0));}
 		| STSPEC			{$$ = new Node(yylineno, Spec, "SPEC", 1,$1);}
 		;
-STSPEC		: STRUCT OPTTAG LC DEFS RC	{$$ = new Node(yylineno, Stspec, "STSPEC", 3,new Node(yylineno, Keyword, $1, 0), $2, $3);}
+STSPEC		: STRUCT OPTTAG LC DEFS RC	{$$ = new Node(yylineno, Stspec, "STSPEC", 3,new Node(yylineno, Keyword, $1, 0), $2, $4);}
 		| STRUCT ID			{$$ = new Node(yylineno, Stspec, "STSPEC", 2,new Node(yylineno, Keyword, $1, 0), new Node(yylineno, Id, $2,0));}
 		;
 OPTTAG		: ID				{$$ = new Node(yylineno, Opttag, "OPTTAG", 1,new Node(yylineno, Id, $1, 0));}	
@@ -99,8 +102,8 @@ STMT		: EXP SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, $1);}
 		| READ LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
 		| WRITE LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
 		;
-ESTMT		: ELSE STMT			{$$ = new Node(yylineno, Estmt, "ESTMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
-		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
+ESTMT		: ELSE STMT %prec ELSE		{$$ = new Node(yylineno, Estmt, "ESTMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
+		| /* empty */%prec LOWER_ELSE	{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 DEFS		: DEF DEFS			{$$ = new Node(yylineno, Defs, "DEFS", 2, $1, $2);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
@@ -116,7 +119,7 @@ DEC 		: VAR				{$$ = new Node(yylineno, Dec, "DEC", 1, $1);}
 INIT 		: EXP				{$$ = new Node(yylineno, Init, "INIT", 1, $1);}
 		| LC ARGS RC			{$$ = new Node(yylineno, Init, "INIT", 1, $2);}
 		;
-FEXP:		:EXP				{$$ = new Node(yylineno, Fexp, "Fexp", 1, $1);}
+FEXP		: EXP				{$$ = new Node(yylineno, Fexp, "Fexp", 1, $1);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 EXP 		: EXP MUL EXP			{$$ = new Node(yylineno, Exp, "EXP", 3, $1, new Node(yylineno, Operator, $2, 0), $3);}	
@@ -167,9 +170,9 @@ ARGS		: EXP COMMA ARGS		{$$ = new Node(yylineno, Args, "ARGS", 2, $1, $3);}
 		; 
 %%
 void yyerror(const char *s) {
-	fprintf(stderr, "[error] : %s. \n",s);
+	fprintf(stderr, "[error] at line [%d] %s %s.\n", yylineno, s, yytext);
 }
-
+int yywrap() { return 1;}
 int main(int argc, char** argv) {
 	if (argc != 2) {
 		cout << "Parameter must be like <infile> <outfile>. \n";
