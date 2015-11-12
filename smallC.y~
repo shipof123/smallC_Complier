@@ -3,61 +3,33 @@
 // @date : 2015.11.01
 // The syntax analysis part.
 
-#include <fstream>
-#include <stdio.h>
-#include <stdlib.h>
 #include "node.h"
-#include <string>
-#include <vector>
+#include "includes.h"
 using namespace std;
 
-extern "C"{
-	void yyerror(const char *s);
-	extern int yylex(void);
-}
-extern int linecount; // get the line number
-//extern int charcount;
+void yyerror(const char *s);
+extern int yylex(void);
+extern int yylineno; // get the line number
 extern char* yytext; // get the token
 
-
-struct Node;
-struct var_array;
-
-Node* program;
-
-FILE* yyin;
-FILE* yyout;
-
+Node* root;
 %}
 
 %union{
-	int m_int;
-	string* m_id;
 	Node* node;
-	vector<Node*>* m_node_vector;
-	struct var_array* m_var_array;
-	vector<var_array*>* m_var_array_vector;
-	vector<string* > m_string_vector;
+	char* string;
 }
-%type <node> PROGRAM EXTDEFS EXTDEF EXP FEXP STMT STMTS STMTBLOCK 
-%type <m_node_vector> PARAS PARA 
-%type <m_var_array> VAR
-%type <m_var_array_vector>
-%type <m_string_bector> 
-EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
+%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARASF PARA
+%type <node> STMTBLOCK STMT ESTMT DEFS DEF DECS INIT FEXP EXP ARRS ARGS
 
-
-%token <m_int>INT 
-%token <m_id>ID
+%token <string> INT 
+%token <string> ID
 %token SEMI COMMA
-%token TYPE
-%token STRUCT
-%token RETURN
-%token IF ELSE
-%token BREAK CONT
-%token FOR
+%token <string> TYPE
+%token <string> STRUCT
+%token <string> RETURN IF ELSE BREAK CONT FOR
 %token LC RC
-%token ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN LOGOR LOGAND BITOR BITXOR BITAND EQU NEQ GT LT GE LE SHL SHR PLUS MINUS MUL DIV MOD LOGNOT MINUSMINUS PLUSPLUS BITNOT LP RP LB RB DOT
+%token <string> ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN LOGOR LOGAND BITOR BITXOR BITAND EQU NEQ GT LT GE LE SHL SHR PLUS MINUS MUL DIV MOD LOGNOT MINUSMINUS PLUSPLUS BITNOT LP RP LB RB DOT
 
 %right ASSIGNOP PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN SHL_ASSIGN SHR_ASSIGN
 %left LOGOR
@@ -78,73 +50,74 @@ EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS D
 %start PROGRAM
 
 %%
-PROGRAM		: EXTDEFS
+PROGRAM		: EXTDEFS 			{root = $$ = new Node(yylineno, Program, "PROGRAM",1,$1);}
 		;
-EXTDEFS		: EXTDEF EXTDEFS
-		| /* empty */
+EXTDEFS		: EXTDEF EXTDEFS		{$$ = new Node(yylineno, Extdefs, "EXTDEFS", 2,$1,$2);}
+		| /* empty */  			{$$ = new Node(yylineno, Null, "NULL", 2,$1,$2);}
 		;
-EXTDEF		: SPEC EXTVARS SEMI
-		| TYPE FUNC STMTBLOCK
+EXTDEF		: SPEC EXTVARS SEMI		{$$ = new Node(yylineno, Extdef, "EXTDEF", 2,$1,$2);}
+		| SPEC FUNC STMTBLOCK		{$$ = new Node(yylineno, Extdef, "EXTDEF", 3,$1,$2,$3);}
 		;
-EXTVARS		: DEC
-		| DEC COMMA EXTVARS
-		| /* empty */
+EXTVARS		: DEC				{$$ = new Node(yylineno, Extvars, "EXTVARS", 1,$1);}
+		| DEC COMMA EXTVARS		{$$ = new Node(yylineno, Extvars, "EXTVARS", 2,$1,$3);}
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-SPEC 		: TYPE
-		| STSPEC
+SPEC 		: TYPE				{$$ = new Node(yylineno, Spec, "SPEC", 1, new Node(yylineno, Type, $1,0));}
+		| STSPEC			{$$ = new Node(yylineno, Spec, "SPEC", 1,$1);}
 		;
-STSPEC		: STRUCT OPTTAG LC DEFS RC
-		| STRUCT ID
+STSPEC		: STRUCT OPTTAG LC DEFS RC	{$$ = new Node(yylineno, Stspec, "STSPEC", 3,new Node(yylineno, Keyword, $1, 0), $2, $3);}
+		| STRUCT ID			{$$ = new Node(yylineno, Stspec, "STSPEC", 2,new Node(yylineno, Keyword, $1, 0), new Node(yylineno, Id, $2,0));}
 		;
-OPTTAG		: ID
-		| /* empty */
+OPTTAG		: ID				{$$ = new Node(yylineno, Opttag, "OPTTAG", 1,new Node(yylineno, Id, $1, 0));}	
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-VAR 		: ID
-		| VAR LB INT RB
+VAR 		: ID				{$$ = new Node(yylineno, Var, "VAR", 1, new Node(yylineno, Id, $1, 0));}	
+		| VAR LB INT RB			{$$ = new Node(yylineno, Var, "VAR", 2, $1, new Node(yylineno, Int, $3, 0));}	
 		;
-FUNC		: ID LP PARAS RP
+FUNC		: ID LP PARAS RP 		{$$ = new Node(yylineno, Func, "FUNC", 2, new Node(yylineno, Id, $1, 0), $3);}	
 		;
-PARAS		: PARASF
-		| /* empty */
+PARAS		: PARASF			{$$ = new Node(yylineno, Paras, "PARAS", 1，$1);}	
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;	
-PARASF		: PARA COMMA PARASF
-		| PARA	
+PARASF		: PARA COMMA PARASF		{$$ = new Node(yylineno, Parasf, "PARASF", 2, $1, $3);}	
+		| PARA				{$$ = new Node(yylineno, Parasg, "PARASF", 1, $1);}	
 		;
-PARA		: SPEC VAR
+PARA		: SPEC VAR			{$$ = new Node(yylineno, Para, "PARA", 2, $1, $2);}	
 		;
-STMTBLOCK	: LC DEFS STMTS RC
+STMTBLOCK	: LC DEFS STMTS RC		{$$ = new Node(yylineno, Stmtblock, "STMTBLOCK", 2, $2, $3);}	
 		;
-STMTS		: STMT STMTS
-		| /* empty */
+STMTS		: STMT STMTS			{$$ = new Node(yylineno, Stmts, "STMTS", 2, $1, $2);}	
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-STMT		: EXP SEMI
-		| STMTBLOCK
-		| RETURN EXP SEMI
-		| IF LP EXP RP STMT ESTMT
-		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT
-		| CONT SEMI
-		| BREAK SEMI
-		| READ LP 
+STMT		: EXP SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, $1);}	
+		| STMTBLOCK			{$$ = new Node(yylineno, Stmt, "STMT", 1, $1);}
+		| RETURN EXP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
+		| IF LP EXP RP STMT ESTMT	{$$ = new Node(yylineno, Stmt, "STMT", 4, new Node(yylineno, Keyword, $1, 0), $2, $5, $6);}
+		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT 	{$$ = new Node(yylineno, Stmt, "STMT", 5, new Node(yylineno, Keyword, $1, 0), $3, $5, $7, $9);}
+		| CONT SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, $1, 0));}
+		| BREAK SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, $1, 0));}
+		| READ LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
+		| WRITE LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
 		;
-ESTMT		: ELSE STMT
-		| /* empty */
+ESTMT		: ELSE STMT			{$$ = new Node(yylineno, Estmt, "ESTMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-DEFS		: DEF DEFS
-		| /* empty */
+DEFS		: DEF DEFS			{$$ = new Node(yylineno, Defs, "DEFS", 2, $1, $2);}
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-DEF		: SPEC DECS SEMI
+DEF		: SPEC DECS SEMI		{$$ = new Node(yylineno, Def, "DEF", 2, $1, $2);}
 		;
-DECS		: DEC COMMA DECS
-		| DEC
+DECS		: DEC COMMA DECS		{$$ = new Node(yylineno, Decs, "DECS", 2, $1, $3);}
+		| DEC				{$$ = new Node(yylineno, Decs, "DECS", 1, $1);}
 		;
-DEC 		: VAR
-		| VAR ASSIGNOP INIT
+DEC 		: VAR				{$$ = new Node(yylineno, Dec, "DEC", 1, $1);}
+		| VAR ASSIGNOP INIT		{$$ = new Node(yylineno, Dec, "DEC", 3, $1, new Node(yylineno, Operator, $2, 0), $3);}
 		;
-INIT 		: EXP
-		| LC ARGS RC
+INIT 		: EXP				{$$ = new Node(yylineno, Init, "INIT", 1, $1);}
+		| LC ARGS RC			{$$ = new Node(yylineno, Init, "INIT", 1, $2);}
 		;
 FEXP:		:EXP
-		| /* empty */
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 EXP 		: EXP MUL EXP
 		| EXP DIV EXP
@@ -187,7 +160,7 @@ EXP 		: EXP MUL EXP
 		| INT
 		;
 ARRS 		: LB EXP RB ARRS
-		| /* empty */
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 ARGS		: EXP COMMA ARGS
 		| EXP

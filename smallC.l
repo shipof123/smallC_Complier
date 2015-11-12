@@ -5,21 +5,11 @@
 / @author : Shen Bingyu
 / @date : 2015.11.1	
 */
-//#include "smallC.tab.h"
 
 //#include <yy.tab.h>
 #include "includes.h"
-int linecount = 1;
+extern int yylineno;
 
-extern "C"
-{
-	int yylex(void);
-}
-
-void update_loc()
-{
-	yylloc.first_line = linecount;
-}
 #define YY_USER_ACTION update_loc();
 %}
 
@@ -33,7 +23,7 @@ void update_loc()
 <comment>{
 [^*\n]*  	/* anything but '*' */
 "*"+[^*/\n]* 	/* '*' not followed by '/' */
-\n		/* new line */
+\n		//{yylineno++;}
 "*"+"/" 	BEGIN(INITIAL);
 }
 
@@ -109,7 +99,7 @@ write			{return WRITE;}
 "]"		 	{return RB;}
 "{" 			p{return LC;}
 "}" 			{return RC;}
-[\n]			{++linecount;/*printf("\n%d",linecount);*/}
+[\n]			{yylineno++;/*printf("\n%d",linecount);*/}
 [ \t\r] ; 		// SKIPPING
 "//"(.)*		{}/*comment for one line*/
 .			{yyerror("ERROR");}
