@@ -8,12 +8,7 @@
 
 //#include <yy.tab.h>
 #include "includes.h"
-int linecount = 1;
-
-extern "C"
-{
-	int yylex(void);
-}
+extern int yylineno;
 
 #define YY_USER_ACTION update_loc();
 %}
@@ -28,7 +23,7 @@ extern "C"
 <comment>{
 [^*\n]*  	/* anything but '*' */
 "*"+[^*/\n]* 	/* '*' not followed by '/' */
-\n		{
+\n		//{yylineno++;}
 "*"+"/" 	BEGIN(INITIAL);
 }
 
@@ -104,7 +99,7 @@ write			{return WRITE;}
 "]"		 	{return RB;}
 "{" 			p{return LC;}
 "}" 			{return RC;}
-[\n]			{++linecount;/*printf("\n%d",linecount);*/}
+[\n]			{yylineno++;/*printf("\n%d",linecount);*/}
 [ \t\r] ; 		// SKIPPING
 "//"(.)*		{}/*comment for one line*/
 .			{yyerror("ERROR");}

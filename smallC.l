@@ -28,6 +28,8 @@ extern int yylineno;
 }
 
  /* reserved type name */ 
+read			{return READ;}
+write			{return WRITE;}
 struct 			{return STRUCT;}
 return	 		{return RETURN;}
 if 			{return IF;}
@@ -40,8 +42,7 @@ int 			{return TYPE;} // ONLY int
 0[0-7]*			{return INT;} // oct integer 
 [1-9][0-9]* 		{return INT;} // comman integer  
 [a-zA-Z_][a-zA-Z0-9_]*	{return ID;}
-read			{return READ;}
-write			{return WRITE;}
+
 
 ";" 			{return SEMI;}
 "," 			{return COMMA;}
