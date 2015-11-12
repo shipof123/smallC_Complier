@@ -19,7 +19,7 @@ Node* root;
 	Node* node;
 	char* string;
 }
-%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARASF PARA
+%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS EXTVAR SPEC STSPEC OPTTAG VAR FUNC PARAS PARASF PARA
 %type <node> STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT FEXP EXP ARRS ARGS
 
 %token <string> INT 
@@ -61,9 +61,11 @@ EXTDEFS		: EXTDEF EXTDEFS		{$$ = new Node(yylineno, Extdefs, "EXTDEFS", 2, $1,$2
 EXTDEF		: SPEC EXTVARS SEMI		{$$ = new Node(yylineno, Extdef, "EXTDEF", 2,$1,$2);}
 		| SPEC FUNC STMTBLOCK		{$$ = new Node(yylineno, Extdef, "EXTDEF", 3,$1,$2,$3);}
 		;
-EXTVARS		: DEC				{$$ = new Node(yylineno, Extvars, "EXTVARS", 1, $1);}
-		| DEC COMMA EXTVARS		{$$ = new Node(yylineno, Extvars, "EXTVARS", 2, $1, $3);}
+EXTVARS		: EXTVAR			{$$ = new Node(yylineno, Extvars, "EXTVARS", 1, $1);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
+		;
+EXTVAR		: DEC				{$$ = new Node(yylineno, Extvar, "EXTVAR", 1, $1);}
+		| DEC COMMA EXTVAR		{$$ = new Node(yylineno, Extvar, "EXTVAR", 2, $1, $3);}
 		;
 SPEC 		: TYPE				{$$ = new Node(yylineno, Spec, "SPEC", 1, new Node(yylineno, Type, $1,0));}
 		| STSPEC			{$$ = new Node(yylineno, Spec, "SPEC", 1,$1);}

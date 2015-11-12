@@ -6,6 +6,7 @@ typedef enum {
 	Extdefs,
 	Extdef,
 	Extvars,
+	Extvar,
 	Spec,
 	Stspec,
 	Opttag,
