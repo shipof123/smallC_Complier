@@ -154,20 +154,20 @@ EXP 		: EXP MUL EXP			{$$ = new Node(yylineno, Exp, "EXP", 3, $1, new Node(yylin
 		| PLUSPLUS EXP			{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, $1, 0), $2);}
 		| MINUSMINUS EXP		{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, $1, 0), $2);}
 		| LP EXP RP			{$$ = new Node(yylineno, Exp, "EXP", 1, $2);}
-		| ID LP ARGS RP			{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, $1, 0), $2);}
-		| ID ARRS
-		| EXP DOT ID
-		| INT
+		| ID LP ARGS RP			{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Id, $1, 0), $3);}
+		| ID ARRS			{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Id, $1, 0), $2);}
+		| EXP DOT ID			{$$ = new Node(yylineno, Exp, "EXP", 3, $1, new Node(yylineno, Operator, $2, 0), new Node(yylineno, Id, $3, 0));}
+		| INT				{$$ = new Node(yylineno, Exp, "EXP", 1, new Node(yylineno, Int, $1, 0));}
 		;
-ARRS 		: LB EXP RB ARRS
+ARRS 		: LB EXP RB ARRS		{$$ = new Node(yylineno, Arrs, "ARRS", 2, new Node(yylineno, Exp, $2, 0), $4);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
-ARGS		: EXP COMMA ARGS
-		| EXP
+ARGS		: EXP COMMA ARGS		{$$ = new Node(yylineno, Args, "ARGS", 2, $1, $3);}
+		| EXP				{$$ = new Node(yylineno, Args, "ARGS", 1, $1);}
 		; 
 %%
 void yyerror(const char *s) {
-	fprintf(stderr, "[error] : %s. \n",s);
+	fprintf(stderr, "[error] at line [%d] %s %s.\n", yylineno, s, yytext);
 }
 
 int main(int argc, char** argv) {
