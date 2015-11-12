@@ -21,7 +21,7 @@ extern char* yytext; // get the token
 
 
 struct Node;
-struct Var_ArrayDeclarationInfo;
+struct var_array;
 
 Node* program;
 
@@ -31,18 +31,24 @@ FILE* yyout;
 %}
 
 %union{
-	int n_int_t;
-	string* n_id_t;
+	int m_int;
+	string* m_id;
 	Node* node;
-	vector<Node*>* n_nodeVector;
-	struct 
-	
+	vector<Node*>* m_node_vector;
+	struct var_array* m_var_array;
+	vector<var_array*>* m_var_array_vector;
+	vector<string* > m_string_vector;
 }
-%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
+%type <node> PROGRAM EXTDEFS EXTDEF EXP FEXP STMT STMTS STMTBLOCK 
+%type <m_node_vector> PARAS PARA 
+%type <m_var_array> VAR
+%type <m_var_array_vector>
+%type <m_string_bector> 
+EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
 
 
-%token INT 
-%token ID
+%token <m_int>INT 
+%token <m_id>ID
 %token SEMI COMMA
 %token TYPE
 %token STRUCT
@@ -78,7 +84,7 @@ EXTDEFS		: EXTDEF EXTDEFS
 		| /* empty */
 		;
 EXTDEF		: SPEC EXTVARS SEMI
-		| SPEC FUNC STMTBLOCK
+		| TYPE FUNC STMTBLOCK
 		;
 EXTVARS		: DEC
 		| DEC COMMA EXTVARS
@@ -118,6 +124,8 @@ STMT		: EXP SEMI
 		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT
 		| CONT SEMI
 		| BREAK SEMI
+		| READ LP EXP RP SEMI
+		| WRITE LP EXP RP SEMI
 		;
 ESTMT		: ELSE STMT
 		| /* empty */

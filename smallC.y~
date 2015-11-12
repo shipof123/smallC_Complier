@@ -9,21 +9,46 @@
 #include "node.h"
 #include <string>
 #include <vector>
-union{
-	int node;
+using namespace std;
+
+extern "C"{
+	void yyerror(const char *s);
+	extern int yylex(void);
 }
-void yyerror(const char *s);
+extern int linecount; // get the line number
+//extern int charcount;
+extern char* yytext; // get the token
+
+
+struct Node;
+struct var_array;
+
+Node* program;
 
 FILE* yyin;
 FILE* yyout;
 
 %}
 
-%type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
+%union{
+	int m_int;
+	string* m_id;
+	Node* node;
+	vector<Node*>* m_node_vector;
+	struct var_array* m_var_array;
+	vector<var_array*>* m_var_array_vector;
+	vector<string* > m_string_vector;
+}
+%type <node> PROGRAM EXTDEFS EXTDEF EXP FEXP STMT STMTS STMTBLOCK 
+%type <m_node_vector> PARAS PARA 
+%type <m_var_array> VAR
+%type <m_var_array_vector>
+%type <m_string_bector> 
+EXTVARS SPEC STSPEC OPTTAG VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT EXP ARRS ARGS
 
 
-%token INT 
-%token ID
+%token <m_int>INT 
+%token <m_id>ID
 %token SEMI COMMA
 %token TYPE
 %token STRUCT
@@ -59,7 +84,7 @@ EXTDEFS		: EXTDEF EXTDEFS
 		| /* empty */
 		;
 EXTDEF		: SPEC EXTVARS SEMI
-		| SPEC FUNC STMTBLOCK
+		| TYPE FUNC STMTBLOCK
 		;
 EXTVARS		: DEC
 		| DEC COMMA EXTVARS
@@ -99,6 +124,7 @@ STMT		: EXP SEMI
 		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT
 		| CONT SEMI
 		| BREAK SEMI
+		| READ LP 
 		;
 ESTMT		: ELSE STMT
 		| /* empty */

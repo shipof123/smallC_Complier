@@ -112,6 +112,7 @@ write			{return WRITE;}
 [\n]			{++linecount;/*printf("\n%d",linecount);*/}
 [ \t\r] ; 		// SKIPPING
 "//"(.)*		{}/*comment for one line*/
+.			{yyerror("ERROR");}
 %%
 yywrap()
 {

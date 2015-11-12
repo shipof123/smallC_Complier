@@ -2,37 +2,39 @@
 #define NODE_H
 
 typedef enum {
-	Expr,// expression
-	Stmt,// statement
-	Func,// function
-	Decl,// declaration
-	Prog // program
+	PROGRAM,
+	EXTDEFS,
+	EXTDEF,
+	EXTVARS,
+	SPEC,
+	STSPEC,
+	OPTTAG,
+	VAR,
+	FUNC,
+	PARAS,
+	PARASF,
+	PARA,
+	STMTBLOCK,
+	STMT,
+	ESTMT,
+	DEFS,
+	DEF,
+	DECS,
+	DEC,
+	INIT,
+	FEXP,
+	EXP,
+	ARRS,
+	ARGS
 } NodeType;
-typedef enum {
-	Expr_Assign,
-	Expr_UnaryAssign,
-}ExprType;
-typedef enum {
-	Stmt_Break;
-	Stmt_Continue;
-	Stmt_Return;
-	Stmt_If;
-	Stmt_For;
-	Stmt_IfElse;
-	Stmt_StatementBlock
-}StmtType;
+
 struct Node {
-	Node*		parent;
 	int		line_num;
-	string		node_name;	
+	string		name;
+	int 		size;
+	int 		capacity;	
 	NodeType 	node_type;
-
-	ExprType	expr_type;
-	bool 		is_lvalue_expr; 
-	Node*		eleft;
-	Node*		right;
-
-
-}
+	Node**		children;
+};
 
 #endif //NODE_H

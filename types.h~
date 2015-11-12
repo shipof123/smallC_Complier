@@ -127,7 +127,7 @@ struct ExpNode
 		exp_struct_name = membername;
 	}
 };
-struct var_array
+struct Var_array
 {
 	string var_name;
 	vector<int> var_array_vector;
@@ -153,7 +153,7 @@ struct DecNode
 	}
 	void init_dec_global_var_array(vector<var_array* > var_array_vector) {
 		dec_type = Dec_global_var_array;
-		dec_var_array_vector = var_array_vector;
+		dec_var_array_vector = var_array_vector;	
 	}
 	void init_dec_local_struct() {
 		dec_type = Dec_local_struct;
