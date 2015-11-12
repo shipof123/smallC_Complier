@@ -1,6 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
-
+#include "includes.h"
 typedef enum {
 	Program,
 	Extdefs,
@@ -16,6 +16,7 @@ typedef enum {
 	Parasf,
 	Para,
 	Stmtblock,
+	Stmts,
 	Stmt,
 	Estmt,
 	Defs,
@@ -43,12 +44,12 @@ struct Node {
 	int 		capacity;	
 	NodeType 	node_type;
 	Node**		children;
-	Node(int lineno, NodeType nt, char* n, int s, ...) {
+	Node(int lineno, NodeType nt, const char* n, int s, ...) {
 		line_num = lineno;
 		node_type = nt;
 		name = strdup(n);
 		size = capacity = s;
-		children = new Node* (s);
+		children = new Node*[s];
 		
 		va_list vl;
 		va_start(vl,s);

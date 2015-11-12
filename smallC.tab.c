@@ -97,7 +97,10 @@ Node* root;
 # define YYERROR_VERBOSE 0
 #endif
 
-
+/* In a future release of Bison, this section will be replaced
+   by #include "smallC.tab.h".  */
+#ifndef YY_YY_SMALLC_TAB_H_INCLUDED
+# define YY_YY_SMALLC_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -178,7 +181,7 @@ union YYSTYPE
 	Node* node;
 	char* string;
 
-#line 182 "smallC.tab.c" /* yacc.c:355  */
+#line 185 "smallC.tab.c" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -189,11 +192,11 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-
+#endif /* !YY_YY_SMALLC_TAB_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 197 "smallC.tab.c" /* yacc.c:358  */
+#line 200 "smallC.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1492,546 +1495,546 @@ yyreduce:
     {
         case 2:
 #line 56 "smallC.y" /* yacc.c:1646  */
-    {root = (yyval.node) = new Node(yylineno, Program, "PROGRAM",1,(yyvsp[0].node));}
-#line 1497 "smallC.tab.c" /* yacc.c:1646  */
+    {root = (yyval.node) = new Node(yylineno, Program, "PROGRAM",1, (yyvsp[0].node));}
+#line 1500 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
 #line 58 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extdefs, "EXTDEFS", 2, (yyvsp[-1].node),(yyvsp[0].node));}
-#line 1503 "smallC.tab.c" /* yacc.c:1646  */
+#line 1506 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 59 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1509 "smallC.tab.c" /* yacc.c:1646  */
+#line 1512 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 61 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extdef, "EXTDEF", 2,(yyvsp[-2].node),(yyvsp[-1].node));}
-#line 1515 "smallC.tab.c" /* yacc.c:1646  */
+#line 1518 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 62 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extdef, "EXTDEF", 3,(yyvsp[-2].node),(yyvsp[-1].node),(yyvsp[0].node));}
-#line 1521 "smallC.tab.c" /* yacc.c:1646  */
+#line 1524 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 64 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extvars, "EXTVARS", 1, (yyvsp[0].node));}
-#line 1527 "smallC.tab.c" /* yacc.c:1646  */
+#line 1530 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 65 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1533 "smallC.tab.c" /* yacc.c:1646  */
+#line 1536 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 67 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extvar, "EXTVAR", 1, (yyvsp[0].node));}
-#line 1539 "smallC.tab.c" /* yacc.c:1646  */
+#line 1542 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 68 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Extvar, "EXTVAR", 2, (yyvsp[-2].node), (yyvsp[0].node));}
-#line 1545 "smallC.tab.c" /* yacc.c:1646  */
+#line 1548 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 70 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Spec, "SPEC", 1, new Node(yylineno, Type, (yyvsp[0].string),0));}
-#line 1551 "smallC.tab.c" /* yacc.c:1646  */
+#line 1554 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 71 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Spec, "SPEC", 1,(yyvsp[0].node));}
-#line 1557 "smallC.tab.c" /* yacc.c:1646  */
+#line 1560 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 73 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stspec, "STSPEC", 3,new Node(yylineno, Keyword, (yyvsp[-4].string), 0), (yyvsp[-3].node), (yyvsp[-1].node));}
-#line 1563 "smallC.tab.c" /* yacc.c:1646  */
+#line 1566 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 74 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stspec, "STSPEC", 2,new Node(yylineno, Keyword, (yyvsp[-1].string), 0), new Node(yylineno, Id, (yyvsp[0].string),0));}
-#line 1569 "smallC.tab.c" /* yacc.c:1646  */
+#line 1572 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
 #line 76 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Opttag, "OPTTAG", 1,new Node(yylineno, Id, (yyvsp[0].string), 0));}
-#line 1575 "smallC.tab.c" /* yacc.c:1646  */
+#line 1578 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 77 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1581 "smallC.tab.c" /* yacc.c:1646  */
+#line 1584 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 79 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Var, "VAR", 1, new Node(yylineno, Id, (yyvsp[0].string), 0));}
-#line 1587 "smallC.tab.c" /* yacc.c:1646  */
+#line 1590 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 80 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Var, "VAR", 2, (yyvsp[-3].node), new Node(yylineno, Int, (yyvsp[-1].string), 0));}
-#line 1593 "smallC.tab.c" /* yacc.c:1646  */
+#line 1596 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 82 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Func, "FUNC", 2, new Node(yylineno, Id, (yyvsp[-3].string), 0), (yyvsp[-1].node));}
-#line 1599 "smallC.tab.c" /* yacc.c:1646  */
+#line 1602 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 84 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Paras, "PARAS", 1，(yyvsp[0].node));}
-#line 1605 "smallC.tab.c" /* yacc.c:1646  */
+#line 1608 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 85 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1611 "smallC.tab.c" /* yacc.c:1646  */
+#line 1614 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 87 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Parasf, "PARASF", 2, (yyvsp[-2].node), (yyvsp[0].node));}
-#line 1617 "smallC.tab.c" /* yacc.c:1646  */
+#line 1620 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 88 "smallC.y" /* yacc.c:1646  */
-    {(yyval.node) = new Node(yylineno, Parasg, "PARASF", 1, (yyvsp[0].node));}
-#line 1623 "smallC.tab.c" /* yacc.c:1646  */
+    {(yyval.node) = new Node(yylineno, Parasf, "PARASF", 1, (yyvsp[0].node));}
+#line 1626 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 90 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Para, "PARA", 2, (yyvsp[-1].node), (yyvsp[0].node));}
-#line 1629 "smallC.tab.c" /* yacc.c:1646  */
+#line 1632 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 92 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmtblock, "STMTBLOCK", 2, (yyvsp[-2].node), (yyvsp[-1].node));}
-#line 1635 "smallC.tab.c" /* yacc.c:1646  */
+#line 1638 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 94 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmts, "STMTS", 2, (yyvsp[-1].node), (yyvsp[0].node));}
-#line 1641 "smallC.tab.c" /* yacc.c:1646  */
+#line 1644 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 95 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1647 "smallC.tab.c" /* yacc.c:1646  */
+#line 1650 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
 #line 97 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 1, (yyvsp[-1].node));}
-#line 1653 "smallC.tab.c" /* yacc.c:1646  */
+#line 1656 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 98 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 1, (yyvsp[0].node));}
-#line 1659 "smallC.tab.c" /* yacc.c:1646  */
+#line 1662 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 99 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, (yyvsp[-2].string), 0), (yyvsp[-1].node));}
-#line 1665 "smallC.tab.c" /* yacc.c:1646  */
+#line 1668 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 100 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 4, new Node(yylineno, Keyword, (yyvsp[-5].string), 0), (yyvsp[-4].string), (yyvsp[-1].node), (yyvsp[0].node));}
-#line 1671 "smallC.tab.c" /* yacc.c:1646  */
+#line 1674 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 101 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 5, new Node(yylineno, Keyword, (yyvsp[-8].string), 0), (yyvsp[-6].node), (yyvsp[-4].node), (yyvsp[-2].node), (yyvsp[0].node));}
-#line 1677 "smallC.tab.c" /* yacc.c:1646  */
+#line 1680 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 102 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, (yyvsp[-1].string), 0));}
-#line 1683 "smallC.tab.c" /* yacc.c:1646  */
+#line 1686 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 103 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, (yyvsp[-1].string), 0));}
-#line 1689 "smallC.tab.c" /* yacc.c:1646  */
+#line 1692 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 104 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, (yyvsp[-4].string), 0), (yyvsp[-2].node));}
-#line 1695 "smallC.tab.c" /* yacc.c:1646  */
+#line 1698 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 105 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, (yyvsp[-4].string), 0), (yyvsp[-2].node));}
-#line 1701 "smallC.tab.c" /* yacc.c:1646  */
+#line 1704 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 107 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Estmt, "ESTMT", 2, new Node(yylineno, Keyword, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1707 "smallC.tab.c" /* yacc.c:1646  */
+#line 1710 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 108 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1713 "smallC.tab.c" /* yacc.c:1646  */
+#line 1716 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 110 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Defs, "DEFS", 2, (yyvsp[-1].node), (yyvsp[0].node));}
-#line 1719 "smallC.tab.c" /* yacc.c:1646  */
+#line 1722 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 111 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1725 "smallC.tab.c" /* yacc.c:1646  */
+#line 1728 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 113 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Def, "DEF", 2, (yyvsp[-2].node), (yyvsp[-1].node));}
-#line 1731 "smallC.tab.c" /* yacc.c:1646  */
+#line 1734 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 115 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Decs, "DECS", 2, (yyvsp[-2].node), (yyvsp[0].node));}
-#line 1737 "smallC.tab.c" /* yacc.c:1646  */
+#line 1740 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 116 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Decs, "DECS", 1, (yyvsp[0].node));}
-#line 1743 "smallC.tab.c" /* yacc.c:1646  */
+#line 1746 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 118 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Dec, "DEC", 1, (yyvsp[0].node));}
-#line 1749 "smallC.tab.c" /* yacc.c:1646  */
+#line 1752 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
 #line 119 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Dec, "DEC", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1755 "smallC.tab.c" /* yacc.c:1646  */
+#line 1758 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
 #line 121 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Init, "INIT", 1, (yyvsp[0].node));}
-#line 1761 "smallC.tab.c" /* yacc.c:1646  */
+#line 1764 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
 #line 122 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Init, "INIT", 1, (yyvsp[-1].node));}
-#line 1767 "smallC.tab.c" /* yacc.c:1646  */
+#line 1770 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 124 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Fexp, "Fexp", 1, (yyvsp[0].node));}
-#line 1773 "smallC.tab.c" /* yacc.c:1646  */
+#line 1776 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 125 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 1779 "smallC.tab.c" /* yacc.c:1646  */
+#line 1782 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
 #line 127 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1785 "smallC.tab.c" /* yacc.c:1646  */
+#line 1788 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
 #line 128 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1791 "smallC.tab.c" /* yacc.c:1646  */
+#line 1794 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
 #line 129 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1797 "smallC.tab.c" /* yacc.c:1646  */
+#line 1800 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
 #line 130 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1803 "smallC.tab.c" /* yacc.c:1646  */
+#line 1806 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
 #line 131 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1809 "smallC.tab.c" /* yacc.c:1646  */
+#line 1812 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
 #line 132 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1815 "smallC.tab.c" /* yacc.c:1646  */
+#line 1818 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
 #line 133 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1821 "smallC.tab.c" /* yacc.c:1646  */
+#line 1824 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
 #line 134 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1827 "smallC.tab.c" /* yacc.c:1646  */
+#line 1830 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
 #line 135 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1833 "smallC.tab.c" /* yacc.c:1646  */
+#line 1836 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
 #line 136 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1839 "smallC.tab.c" /* yacc.c:1646  */
+#line 1842 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
 #line 137 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1845 "smallC.tab.c" /* yacc.c:1646  */
+#line 1848 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
 #line 138 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1851 "smallC.tab.c" /* yacc.c:1646  */
+#line 1854 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
 #line 139 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1857 "smallC.tab.c" /* yacc.c:1646  */
+#line 1860 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
 #line 140 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1863 "smallC.tab.c" /* yacc.c:1646  */
+#line 1866 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
 #line 141 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1869 "smallC.tab.c" /* yacc.c:1646  */
+#line 1872 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
 #line 142 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1875 "smallC.tab.c" /* yacc.c:1646  */
+#line 1878 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
 #line 143 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1881 "smallC.tab.c" /* yacc.c:1646  */
+#line 1884 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
 #line 144 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1887 "smallC.tab.c" /* yacc.c:1646  */
+#line 1890 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
 #line 145 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1893 "smallC.tab.c" /* yacc.c:1646  */
+#line 1896 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
 #line 146 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1899 "smallC.tab.c" /* yacc.c:1646  */
+#line 1902 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
 #line 147 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1905 "smallC.tab.c" /* yacc.c:1646  */
+#line 1908 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
 #line 148 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1911 "smallC.tab.c" /* yacc.c:1646  */
+#line 1914 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
 #line 149 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1917 "smallC.tab.c" /* yacc.c:1646  */
+#line 1920 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
 #line 150 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1923 "smallC.tab.c" /* yacc.c:1646  */
+#line 1926 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
 #line 151 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1929 "smallC.tab.c" /* yacc.c:1646  */
+#line 1932 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
 #line 152 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1935 "smallC.tab.c" /* yacc.c:1646  */
+#line 1938 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
 #line 153 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1941 "smallC.tab.c" /* yacc.c:1646  */
+#line 1944 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
 #line 154 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1947 "smallC.tab.c" /* yacc.c:1646  */
+#line 1950 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
 #line 156 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1953 "smallC.tab.c" /* yacc.c:1646  */
+#line 1956 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
 #line 157 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1959 "smallC.tab.c" /* yacc.c:1646  */
+#line 1962 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
 #line 158 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1965 "smallC.tab.c" /* yacc.c:1646  */
+#line 1968 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
 #line 159 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1971 "smallC.tab.c" /* yacc.c:1646  */
+#line 1974 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
 #line 160 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, UnaryOp, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1977 "smallC.tab.c" /* yacc.c:1646  */
+#line 1980 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
 #line 161 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 1, (yyvsp[-1].node));}
-#line 1983 "smallC.tab.c" /* yacc.c:1646  */
+#line 1986 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
 #line 162 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Id, (yyvsp[-3].string), 0), (yyvsp[-1].node));}
-#line 1989 "smallC.tab.c" /* yacc.c:1646  */
+#line 1992 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
 #line 163 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Id, (yyvsp[-1].string), 0), (yyvsp[0].node));}
-#line 1995 "smallC.tab.c" /* yacc.c:1646  */
+#line 1998 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
 #line 164 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 3, (yyvsp[-2].node), new Node(yylineno, Operator, (yyvsp[-1].string), 0), new Node(yylineno, Id, (yyvsp[0].string), 0));}
-#line 2001 "smallC.tab.c" /* yacc.c:1646  */
+#line 2004 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
 #line 165 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Exp, "EXP", 1, new Node(yylineno, Int, (yyvsp[0].string), 0));}
-#line 2007 "smallC.tab.c" /* yacc.c:1646  */
+#line 2010 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
 #line 167 "smallC.y" /* yacc.c:1646  */
-    {(yyval.node) = new Node(yylineno, Arrs, "ARRS", 2, new Node(yylineno, Exp, (yyvsp[-2].node), 0), (yyvsp[0].node));}
-#line 2013 "smallC.tab.c" /* yacc.c:1646  */
+    {(yyval.node) = new Node(yylineno, Arrs, "ARRS", 2, (yyvsp[-2].node), (yyvsp[0].node));}
+#line 2016 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
 #line 168 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Null, "NULL", 0);}
-#line 2019 "smallC.tab.c" /* yacc.c:1646  */
+#line 2022 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
 #line 170 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Args, "ARGS", 2, (yyvsp[-2].node), (yyvsp[0].node));}
-#line 2025 "smallC.tab.c" /* yacc.c:1646  */
+#line 2028 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
 #line 171 "smallC.y" /* yacc.c:1646  */
     {(yyval.node) = new Node(yylineno, Args, "ARGS", 1, (yyvsp[0].node));}
-#line 2031 "smallC.tab.c" /* yacc.c:1646  */
+#line 2034 "smallC.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2035 "smallC.tab.c" /* yacc.c:1646  */
+#line 2038 "smallC.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2271,14 +2274,8 @@ int main(int argc, char** argv) {
 		return -1;	
 	}
 		
-	yyin = fopen(argv[1],"r");
-	if(!yyin) {
-		perror(argv[1]);
-		return -2;
-	}
-	yyout = freopen(argv[2], "w+", stdout);
+	freopen(argv[1],"r",stdin);
+	freopen(argv[2], "w+", stdout);
 	yyparse();
-	fclose(yyin);
-	fclose(yyout);
 	return 0;
 }

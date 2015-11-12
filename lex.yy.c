@@ -572,7 +572,7 @@ char *yytext;
 / @date : 2015.11.1	
 */
 
-//#include <yy.tab.h>
+#include "yy.tab.h"
 #include "includes.h"
 extern int yylineno;
 

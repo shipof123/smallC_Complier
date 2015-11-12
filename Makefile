@@ -1,20 +1,16 @@
-LEX = lex
+LEX = flex
 YACC = bison 
 CC = g++
-
-scc:lex.yy.o y.tab.o
-	$(CC) y.tab.c -g -ly -ll -o scc 2> error.err
-lex.yy.o:lex.yy.c y.tab.h
-	$(CC) -c lex.yy.c 2> error.err
-
-y.tab.o:y.tab.c def.h ast.h semantics.h translate.h optimize.h interprete.h
-	$(CC) -c y.tab.c 2> error.err
-
-y.tab.c y.tab.h:smallc.y header.h def.h ast.h semantics.h translate.h optimize.h interprete.h
-	$(YACC) smallc.y -v -d
-
-lex.yy.c:smallc.l header.h def.h ast.h semantics.h translate.h optimize.h interprete.h
-	$(LEX) smallc.l
+program: y.tab.o lex.yy.o
+	g++ y.tab.c -g -ly -ll -o scc 
+lex.yy.o:
+	g++ -c lex.yy.c
+y.tab.o:
+	g++ -c y.tab.c 
+y.tab.c y.tab.h:
+	bison smallC.y -v -d
+lex.yy.c:
+	flex smallC.l
 
 clean:
-	rm -f *.o *.c *.h
+	rm -f *.o

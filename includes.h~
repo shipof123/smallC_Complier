@@ -1,12 +1,12 @@
 #ifndef INCLUDES
 #define INCLUDES
-
-//#include <iostream>
-//#include <fstream>
-//#include <string>
-//#include <map>
-#include <stdio.h>
-#include <stdlib.h> 
-//using namespace std;
-
+#include <cstdio>
+#include <cstdlib>
+#include <cassert>
+#include <cstdarg>
+#include <vector>
+#include <map>
+#include <iostream>
+#include <fstream>
+#include <set>
 #endif //INCLUDES
