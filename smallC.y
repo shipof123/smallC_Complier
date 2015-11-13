@@ -2,9 +2,11 @@
 // @author : Shen Bingyu
 // @date : 2015.11.01
 // The syntax analysis part.
-
 #include "node.h"
 #include "includes.h"
+#include "ast.h"
+#include "lex.yy.c"
+
 using namespace std;
 
 void yyerror(const char *s);
@@ -12,7 +14,6 @@ extern int yylex(void);
 extern int yylineno; // get the line number
 extern char* yytext; // get the token
 
-Node* root;
 %}
 
 %union{
@@ -79,10 +80,10 @@ OPTTAG		: ID				{$$ = new Node(yylineno, Opttag, "OPTTAG", 1,new Node(yylineno, 
 VAR 		: ID				{$$ = new Node(yylineno, Var, "VAR", 1, new Node(yylineno, Id, $1, 0));}	
 		| VAR LB INT RB			{$$ = new Node(yylineno, Var, "VAR", 2, $1, new Node(yylineno, Int, $3, 0));}	
 		;
-FUNC		: ID LP PARAS RP 		{$$ = new Node(yylineno, Func, "FUNC", 2, new Node(yylineno, Id, $1, 0), $3);}
+FUNC		: ID LP PARAS RP		{$$ = new Node(yylineno, Func, "FUNC", 2, new Node(yylineno, Id, $1, 0), $3);}
 		;
-PARAS		: PARASF			{$$ = new Node(yylineno, Paras, "PARAS", 1，$1);}	
-		| /*empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
+PARAS		: PARASF			{$$ = new Node(yylineno, Paras, "PARAS", 1, $1);}
+		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 PARASF		: PARA COMMA PARASF		{$$ = new Node(yylineno, Parasf, "PARASF", 2, $1, $3);}	
 		| PARA				{$$ = new Node(yylineno, Parasf, "PARASF", 1, $1);}	
@@ -172,9 +173,10 @@ ARGS		: EXP COMMA ARGS		{$$ = new Node(yylineno, Args, "ARGS", 2, $1, $3);}
 		; 
 %%
 void yyerror(const char *s) {
+	fflush(stdout);
 	fprintf(stderr, "[error] at line [%d] %s %s.\n", yylineno, s, yytext);
 }
-int yywrap() { return 1;}
+int yywrap() {return 1;}
 int main(int argc, char** argv) {
 	if (argc != 2) {
 		cout << "Parameter must be like <infile> <outfile>. \n";
@@ -183,6 +185,14 @@ int main(int argc, char** argv) {
 		
 	freopen(argv[1],"r",stdin);
 	freopen(argv[2], "w+", stdout);
-	yyparse();
+	if(!yyparse())
+	{
+		print_ast(root, 0);
+		cout << "parsing complete.\n";
+	}
+	else
+	{
+		cout << "parsing failed.\n";
+	}	
 	return 0;
 }

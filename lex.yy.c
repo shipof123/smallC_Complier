@@ -572,11 +572,11 @@ char *yytext;
 / @date : 2015.11.1	
 */
 
-#include "yy.tab.h"
 #include "includes.h"
-extern int yylineno;
-
-#define YY_USER_ACTION update_loc();
+#include "node.h"
+#include "y.tab.h"
+void yyerror(const char*);
+extern int yyval, yylineno;
 
 #line 582 "lex.yy.c"
 
@@ -894,320 +894,319 @@ BEGIN(INITIAL);
 case 6:
 YY_RULE_SETUP
 #line 31 "smallC.l"
-{return READ;}
+{yylval.string = strdup(yytext);return READ;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 32 "smallC.l"
-{return WRITE;}
+{yylval.string = strdup(yytext);return WRITE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 33 "smallC.l"
-{return STRUCT;}
+{yylval.string = strdup(yytext);return STRUCT;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 34 "smallC.l"
-{return RETURN;}
+{yylval.string = strdup(yytext);return RETURN;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 35 "smallC.l"
-{return IF;}
+{yylval.string = strdup(yytext);return IF;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 36 "smallC.l"
-{return ELSE;}
+{yylval.string = strdup(yytext);return ELSE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 37 "smallC.l"
-{return BREAK;}
+{yylval.string = strdup(yytext);return BREAK;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 38 "smallC.l"
-{return CONT;}
+{yylval.string = strdup(yytext);return CONT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 39 "smallC.l"
-{return FOR;}
+{yylval.string = strdup(yytext);return FOR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 40 "smallC.l"
-{return TYPE;} // ONLY int
+{yylval.string = strdup(yytext);return TYPE;} // ONLY int
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 41 "smallC.l"
-{return INT;} // hex integer
+{yylval.string = strdup(yytext);return INT;} // hex integer
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 42 "smallC.l"
-{return INT;} // oct integer 
+{yylval.string = strdup(yytext);return INT;} // oct integer 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 43 "smallC.l"
-{return INT;} // comman integer  
+{yylval.string = strdup(yytext);return INT;} // comman integer  
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 44 "smallC.l"
-{return ID;}
+{yylval.string = strdup(yytext);return ID;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 47 "smallC.l"
-{return SEMI;}
+{yylval.string = strdup(yytext);return SEMI;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 48 "smallC.l"
-{return COMMA;}
+{yylval.string = strdup(yytext);return COMMA;}
 	YY_BREAK
 /* 1 */
 case 22:
 YY_RULE_SETUP
 #line 50 "smallC.l"
-{return DOT;} 
+{yylval.string = strdup(yytext);return DOT;} 
 	YY_BREAK
 /* 2 */
 case 23:
 YY_RULE_SETUP
 #line 52 "smallC.l"
-{return MINUS;} // binary  4 or unary 2
+{yylval.string = strdup(yytext);return MINUS;} // binary  4 or unary 2
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 53 "smallC.l"
-{return LOGNOT;}
+{yylval.string = strdup(yytext);return LOGNOT;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 54 "smallC.l"
-{return PLUSPLUS;}
+{yylval.string = strdup(yytext);return PLUSPLUS;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 55 "smallC.l"
-{return MINUSMINUS;}
+{yylval.string = strdup(yytext);return MINUSMINUS;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 56 "smallC.l"
-{return BITNOT;}
+{yylval.string = strdup(yytext);return BITNOT;}
 	YY_BREAK
 /* 3 */
 case 28:
 YY_RULE_SETUP
 #line 58 "smallC.l"
-{return MUL;}
+{yylval.string = strdup(yytext);return MUL;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 59 "smallC.l"
-{return DIV;}
+{yylval.string = strdup(yytext);return DIV;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 60 "smallC.l"
-{return MOD;}
+{yylval.string = strdup(yytext);return MOD;}
 	YY_BREAK
 /* 4 */ 
 case 31:
 YY_RULE_SETUP
 #line 62 "smallC.l"
-{return PLUS;}
+{yylval.string = strdup(yytext);return PLUS;}
 	YY_BREAK
 /* 5 */
 case 32:
 YY_RULE_SETUP
 #line 64 "smallC.l"
-{return SHL;}
+{yylval.string = strdup(yytext);return SHL;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 65 "smallC.l"
-{return SHR;}
+{yylval.string = strdup(yytext);return SHR;}
 	YY_BREAK
 /* 6 */
 case 34:
 YY_RULE_SETUP
 #line 67 "smallC.l"
-{return GT;}
+{yylval.string = strdup(yytext);return GT;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 68 "smallC.l"
-{return LT;}
+{yylval.string = strdup(yytext);return LT;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 69 "smallC.l"
-{return GE;}
+{yylval.string = strdup(yytext);return GE;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 70 "smallC.l"
-{return LE;}
+{yylval.string = strdup(yytext);return LE;}
 	YY_BREAK
 /* 7 */
 case 38:
 YY_RULE_SETUP
 #line 72 "smallC.l"
-{return EQU;}
+{yylval.string = strdup(yytext);return EQU;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 73 "smallC.l"
-{return NEQ;}
+{yylval.string = strdup(yytext);return NEQ;}
 	YY_BREAK
 /* 8 */
 case 40:
 YY_RULE_SETUP
 #line 75 "smallC.l"
-{return BITAND;}
+{yylval.string = strdup(yytext);return BITAND;}
 	YY_BREAK
 /* 9 */
 case 41:
 YY_RULE_SETUP
 #line 77 "smallC.l"
-{return BITXOR;}
+{yylval.string = strdup(yytext);return BITXOR;}
 	YY_BREAK
 /* 10 */
 case 42:
 YY_RULE_SETUP
 #line 79 "smallC.l"
-{return BITOR;}
+{yylval.string = strdup(yytext);return BITOR;}
 	YY_BREAK
 /* 11 */
 case 43:
 YY_RULE_SETUP
 #line 81 "smallC.l"
-{return LOGAND;};
+{yylval.string = strdup(yytext);return LOGAND;};
 	YY_BREAK
 /* 12 */
 case 44:
 YY_RULE_SETUP
 #line 83 "smallC.l"
-{return LOGOR;}
+{yylval.string = strdup(yytext);return LOGOR;}
 	YY_BREAK
 /* 13 */
 case 45:
 YY_RULE_SETUP
 #line 85 "smallC.l"
-{return ASSIGNOP
-;}
+{yylval.string = strdup(yytext);return ASSIGNOP;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "smallC.l"
-{return PLUS_ASSIGN;}
+#line 86 "smallC.l"
+{yylval.string = strdup(yytext);return PLUS_ASSIGN;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 88 "smallC.l"
-{return MINUS_ASSIGN;}
+#line 87 "smallC.l"
+{yylval.string = strdup(yytext);return MINUS_ASSIGN;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 89 "smallC.l"
-{return MUL_ASSIGN;}
+#line 88 "smallC.l"
+{yylval.string = strdup(yytext);return MUL_ASSIGN;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 90 "smallC.l"
-{return DIV_ASSIGN;}
+#line 89 "smallC.l"
+{yylval.string = strdup(yytext);return DIV_ASSIGN;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "smallC.l"
-{return AND_ASSIGN;}
+#line 90 "smallC.l"
+{yylval.string = strdup(yytext);return AND_ASSIGN;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 92 "smallC.l"
-{return XOR_ASSIGN;}
+#line 91 "smallC.l"
+{yylval.string = strdup(yytext);return XOR_ASSIGN;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 93 "smallC.l"
-{return OR_ASSIGN;}
+#line 92 "smallC.l"
+{yylval.string = strdup(yytext);return OR_ASSIGN;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 94 "smallC.l"
-{return SHL_ASSIGN;}
+#line 93 "smallC.l"
+{yylval.string = strdup(yytext);return SHL_ASSIGN;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 95 "smallC.l"
-{return SHR_ASSIGN;}
+#line 94 "smallC.l"
+{yylval.string = strdup(yytext);return SHR_ASSIGN;}
 	YY_BREAK
 /* brances */
 case 55:
 YY_RULE_SETUP
-#line 97 "smallC.l"
-{return LP;}
+#line 96 "smallC.l"
+{yylval.string = strdup(yytext);return LP;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 98 "smallC.l"
-{return RP;}
+#line 97 "smallC.l"
+{yylval.string = strdup(yytext);return RP;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 99 "smallC.l"
-{return LB;}
+#line 98 "smallC.l"
+{yylval.string = strdup(yytext);return LB;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 100 "smallC.l"
-{return RB;}
+#line 99 "smallC.l"
+{yylval.string = strdup(yytext);return RB;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 101 "smallC.l"
-p{return LC;}
+#line 100 "smallC.l"
+{yylval.string = strdup(yytext);return LC;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 102 "smallC.l"
-{return RC;}
+#line 101 "smallC.l"
+{yylval.string = strdup(yytext);return RC;}
 	YY_BREAK
 case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
-#line 103 "smallC.l"
+#line 102 "smallC.l"
 {yylineno++;/*printf("\n%d",linecount);*/}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 104 "smallC.l"
+#line 103 "smallC.l"
 ; 		// SKIPPING
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 105 "smallC.l"
+#line 104 "smallC.l"
 {}/*comment for one line*/
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 106 "smallC.l"
+#line 105 "smallC.l"
 {yyerror("ERROR");}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 107 "smallC.l"
+#line 106 "smallC.l"
 ECHO;
 	YY_BREAK
-#line 1211 "lex.yy.c"
+#line 1210 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(comment):
 	yyterminate();
@@ -2215,17 +2214,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 106 "smallC.l"
+#line 105 "smallC.l"
 
 
-yywrap()
-{
 
-}
-int main(int argc, char** argv) 
-{
-    yylex();
-    //ffloush(yyout);
-    exit(0);
-}
 

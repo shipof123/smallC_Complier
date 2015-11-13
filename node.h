@@ -1,6 +1,10 @@
+#pragma once 
+
 #ifndef NODE_H
 #define NODE_H
 #include "includes.h"
+
+struct Node;
 typedef enum {
 	Program,
 	Extdefs,
@@ -34,7 +38,7 @@ typedef enum {
 	Int,
 	Type,
 	Id,
-	Keyword
+	Keyword 
 } NodeType;
 
 struct Node {
@@ -57,7 +61,11 @@ struct Node {
 			children[i] = va_arg(vl, Node*);
 		}
 		va_end(vl);
-	}		
+	}
+	bool isLeaf()
+	{
+		return size == 0;
+	}	
 };
-
+Node* root;
 #endif //NODE_H

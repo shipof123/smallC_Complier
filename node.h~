@@ -1,6 +1,10 @@
+#pragma once 
+
 #ifndef NODE_H
 #define NODE_H
 #include "includes.h"
+
+struct Node;
 typedef enum {
 	Program,
 	Extdefs,
@@ -16,6 +20,7 @@ typedef enum {
 	Parasf,
 	Para,
 	Stmtblock,
+	Stmts,
 	Stmt,
 	Estmt,
 	Defs,
@@ -33,7 +38,7 @@ typedef enum {
 	Int,
 	Type,
 	Id,
-	Keyword
+	Keyword 
 } NodeType;
 
 struct Node {
@@ -58,5 +63,5 @@ struct Node {
 		va_end(vl);
 	}		
 };
-
+Node* root;
 #endif //NODE_H
