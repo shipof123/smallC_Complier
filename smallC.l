@@ -15,8 +15,6 @@ extern int yyval, yylineno;
 
 %x comment
 
-%option yylineno 
-
 
 %%
 "/*"		BEGIN(comment);

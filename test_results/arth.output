@@ -1,0 +1,52 @@
+PROGRAM
+|_EXTDEFS
+  |_EXTDEF
+  | |_SPEC
+  | | |_int 
+  | |_FUNC
+  | | |_main 
+  | | |_NULL 
+  | |_STMTBLOCK
+  |   |_DEFS
+  |   | |_DEF
+  |   | | |_SPEC
+  |   | | | |_int 
+  |   | | |_DECS
+  |   | |   |_DEC
+  |   | |   | |_VAR
+  |   | |   |   |_a 
+  |   | |   |_DECS
+  |   | |     |_DEC
+  |   | |       |_VAR
+  |   | |         |_b 
+  |   | |_NULL 
+  |   |_STMTS
+  |     |_STMT
+  |     | |_read 
+  |     | |_EXP
+  |     |   |_a 
+  |     |   |_NULL 
+  |     |_STMTS
+  |       |_STMT
+  |       | |_read 
+  |       | |_EXP
+  |       |   |_b 
+  |       |   |_NULL 
+  |       |_STMTS
+  |         |_STMT
+  |         | |_write 
+  |         | |_EXP
+  |         |   |_EXP
+  |         |   | |_a 
+  |         |   | |_NULL 
+  |         |   |_+ 
+  |         |   |_EXP
+  |         |     |_b 
+  |         |     |_NULL 
+  |         |_STMTS
+  |           |_STMT
+  |           | |_return 
+  |           | |_EXP
+  |           |   |_0 
+  |           |_NULL 
+  |_NULL 

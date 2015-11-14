@@ -1,7 +1,11 @@
 %{
-// @author : Shen Bingyu
-// @date : 2015.11.01
-// The syntax analysis part.
+/* 
+*  File name : smallC.y
+*  Output file: y.tab.h y.tab.c y.output
+*  The syntax analysis part.
+*
+*/
+
 #include "node.h"
 #include "includes.h"
 #include "ast.h"
@@ -13,7 +17,7 @@ void yyerror(const char *s);
 extern int yylex(void);
 extern int yylineno; // get the line number
 extern char* yytext; // get the token
-
+Node* root;
 %}
 
 %union{
@@ -69,12 +73,12 @@ EXTVAR		: DEC				{$$ = new Node(yylineno, Extvar, "EXTVAR", 1, $1);}
 		| DEC COMMA EXTVAR		{$$ = new Node(yylineno, Extvar, "EXTVAR", 2, $1, $3);}
 		;
 SPEC 		: TYPE				{$$ = new Node(yylineno, Spec, "SPEC", 1, new Node(yylineno, Type, $1,0));}
-		| STSPEC			{$$ = new Node(yylineno, Spec, "SPEC", 1,$1);}
+		| STSPEC			{$$ = new Node(yylineno, Spec, "SPEC", 1, $1);}
 		;
-STSPEC		: STRUCT OPTTAG LC DEFS RC	{$$ = new Node(yylineno, Stspec, "STSPEC", 3,new Node(yylineno, Keyword, $1, 0), $2, $4);}
-		| STRUCT ID			{$$ = new Node(yylineno, Stspec, "STSPEC", 2,new Node(yylineno, Keyword, $1, 0), new Node(yylineno, Id, $2,0));}
+STSPEC		: STRUCT OPTTAG LC DEFS RC	{$$ = new Node(yylineno, Stspec, "STSPEC", 3, new Node(yylineno, Keyword, $1, 0), $2, $4);}
+		| STRUCT ID			{$$ = new Node(yylineno, Stspec, "STSPEC", 2, new Node(yylineno, Keyword, $1, 0), new Node(yylineno, Id, $2,0));}
 		;
-OPTTAG		: ID				{$$ = new Node(yylineno, Opttag, "OPTTAG", 1,new Node(yylineno, Id, $1, 0));}	
+OPTTAG		: ID				{$$ = new Node(yylineno, Opttag, "OPTTAG", 1, new Node(yylineno, Id, $1, 0));}	
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 VAR 		: ID				{$$ = new Node(yylineno, Var, "VAR", 1, new Node(yylineno, Id, $1, 0));}	
@@ -178,17 +182,17 @@ void yyerror(const char *s) {
 }
 int yywrap() {return 1;}
 int main(int argc, char** argv) {
-	if (argc != 2) {
+	if (argc != 3) {
 		cout << "Parameter must be like <infile> <outfile>. \n";
 		return -1;	
 	}
-		
+	
 	freopen(argv[1],"r",stdin);
 	freopen(argv[2], "w+", stdout);
 	if(!yyparse())
 	{
 		print_ast(root, 0);
-		cout << "parsing complete.\n";
+		//cout << argv[1] <<"---" << argv[2] <<endl;
 	}
 	else
 	{

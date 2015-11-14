@@ -55,7 +55,7 @@ int 			{yylval.string = strdup(yytext);return TYPE;} // ONLY int
 "--" 			{yylval.string = strdup(yytext);return MINUSMINUS;}
 "~" 			{yylval.string = strdup(yytext);return BITNOT;}
  /* 3 */
-"*" 			{yylval.string = strdup(yytext);eturn MUL;}
+"*" 			{yylval.string = strdup(yytext);return MUL;}
 "/" 			{yylval.string = strdup(yytext);return DIV;}
 "%" 			{yylval.string = strdup(yytext);return MOD;}
  /* 4 */ 
@@ -64,7 +64,7 @@ int 			{yylval.string = strdup(yytext);return TYPE;} // ONLY int
 "<<" 			{yylval.string = strdup(yytext);return SHL;}
 ">>" 			{yylval.string = strdup(yytext);return SHR;}
  /* 6 */
-">" 			{ryylval.string = strdup(yytext);eturn GT;}
+">" 			{yylval.string = strdup(yytext);return GT;}
 "<" 			{yylval.string = strdup(yytext);return LT;}
 ">=" 			{yylval.string = strdup(yytext);return GE;}
 "<=" 			{yylval.string = strdup(yytext);return LE;}
@@ -86,7 +86,7 @@ int 			{yylval.string = strdup(yytext);return TYPE;} // ONLY int
 "+=" 			{yylval.string = strdup(yytext);return PLUS_ASSIGN;}
 "-=" 			{yylval.string = strdup(yytext);return MINUS_ASSIGN;}
 "*=" 			{yylval.string = strdup(yytext);return MUL_ASSIGN;}
-"/=" 			{ryylval.string = strdup(yytext);eturn DIV_ASSIGN;}
+"/=" 			{yylval.string = strdup(yytext);return DIV_ASSIGN;}
 "&=" 			{yylval.string = strdup(yytext);return AND_ASSIGN;}
 "^=" 			{yylval.string = strdup(yytext);return XOR_ASSIGN;}
 "|=" 			{yylval.string = strdup(yytext);return OR_ASSIGN;}

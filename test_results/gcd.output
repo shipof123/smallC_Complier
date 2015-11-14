@@ -1,0 +1,105 @@
+PROGRAM
+|_EXTDEFS
+  |_EXTDEF
+  | |_SPEC
+  | | |_int 
+  | |_EXTVARS
+  |   |_EXTVAR
+  |     |_DEC
+  |     | |_VAR
+  |     |   |_a 
+  |     |_EXTVAR
+  |       |_DEC
+  |         |_VAR
+  |           |_b 
+  |_EXTDEFS
+    |_EXTDEF
+    | |_SPEC
+    | | |_int 
+    | |_FUNC
+    | | |_gcd 
+    | | |_PARAS
+    | |   |_PARASF
+    | |     |_PARA
+    | |     | |_SPEC
+    | |     | | |_int 
+    | |     | |_VAR
+    | |     |   |_x 
+    | |     |_PARASF
+    | |       |_PARA
+    | |         |_SPEC
+    | |         | |_int 
+    | |         |_VAR
+    | |           |_y 
+    | |_STMTBLOCK
+    |   |_NULL 
+    |   |_STMTS
+    |     |_STMT
+    |     | |_if 
+    |     | |_(null) 
+    |     | |_STMT
+    |     | | |_return 
+    |     | | |_EXP
+    |     | |   |_x 
+    |     | |   |_NULL 
+    |     | |_NULL 
+    |     |_STMTS
+    |       |_STMT
+    |       | |_return 
+    |       | |_EXP
+    |       |   |_gcd 
+    |       |   |_ARGS
+    |       |     |_EXP
+    |       |     | |_y 
+    |       |     | |_NULL 
+    |       |     |_ARGS
+    |       |       |_EXP
+    |       |         |_EXP
+    |       |         | |_x 
+    |       |         | |_NULL 
+    |       |         |_% 
+    |       |         |_EXP
+    |       |           |_y 
+    |       |           |_NULL 
+    |       |_NULL 
+    |_EXTDEFS
+      |_EXTDEF
+      | |_SPEC
+      | | |_int 
+      | |_FUNC
+      | | |_main 
+      | | |_NULL 
+      | |_STMTBLOCK
+      |   |_NULL 
+      |   |_STMTS
+      |     |_STMT
+      |     | |_read 
+      |     | |_EXP
+      |     |   |_a 
+      |     |   |_NULL 
+      |     |_STMTS
+      |       |_STMT
+      |       | |_read 
+      |       | |_EXP
+      |       |   |_b 
+      |       |   |_NULL 
+      |       |_STMTS
+      |         |_STMT
+      |         | |_write 
+      |         | |_EXP
+      |         |   |_gcd 
+      |         |   |_ARGS
+      |         |     |_EXP
+      |         |     | |_a 
+      |         |     | |_NULL 
+      |         |     |_ARGS
+      |         |       |_EXP
+      |         |         |_b 
+      |         |         |_NULL 
+      |         |_STMTS
+      |           |_STMT
+      |           | |_return 
+      |           | |_EXP
+      |           |   |_0 
+      |           |_NULL 
+      |_NULL 

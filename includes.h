@@ -1,4 +1,9 @@
-//This file is the header file.
+/* 
+*  File name : includes.h
+*  Output file: 
+*  Head file for all needed head files.
+*
+*/
 #pragma once 
 #ifndef INCLUDES
 #define INCLUDES

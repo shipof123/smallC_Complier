@@ -1,0 +1,31 @@
+PROGRAM
+|_EXTDEFS
+  |_EXTDEF
+  | |_SPEC
+  | | |_int 
+  | |_FUNC
+  | | |_main 
+  | | |_NULL 
+  | |_STMTBLOCK
+  |   |_NULL 
+  |   |_STMTS
+  |     |_STMT
+  |     | |_if 
+  |     | |_(null) 
+  |     | |_STMT
+  |     | | |_write 
+  |     | | |_EXP
+  |     | |   |_345 
+  |     | |_ESTMT
+  |     |   |_else 
+  |     |   |_STMT
+  |     |     |_write 
+  |     |     |_EXP
+  |     |       |_678 
+  |     |_STMTS
+  |       |_STMT
+  |       | |_return 
+  |       | |_EXP
+  |       |   |_0 
+  |       |_NULL 
+  |_NULL 

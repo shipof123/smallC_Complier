@@ -1,0 +1,320 @@
+parsing complete.
+PROGRAM
+|_EXTDEFS
+  |_EXTDEF
+  | |_SPEC
+  | | |_int  
+  | |_EXTVARS
+  |   |_EXTVAR
+  |     |_DEC
+  |       |_VAR
+  |         |_n  
+  |_EXTDEFS
+    |_EXTDEF
+    | |_SPEC
+    | | |_int  
+    | |_EXTVARS
+    |   |_EXTVAR
+    |     |_DEC
+    |       |_VAR
+    |       | |_ans  
+    |       |_=  
+    |       |_INIT
+    |         |_EXP
+    |           |_0  
+    |_EXTDEFS
+      |_EXTDEF
+      | |_SPEC
+      | | |_int  
+      | |_EXTVARS
+      |   |_EXTVAR
+      |     |_DEC
+      |       |_VAR
+      |         |_VAR
+      |         | |_b  
+      |         |_20  
+      |_EXTDEFS
+        |_EXTDEF
+        | |_SPEC
+        | | |_int  
+        | |_EXTVARS
+        |   |_EXTVAR
+        |     |_DEC
+        |       |_VAR
+        |         |_VAR
+        |         | |_l  
+        |         |_40  
+        |_EXTDEFS
+          |_EXTDEF
+          | |_SPEC
+          | | |_int  
+          | |_EXTVARS
+          |   |_EXTVAR
+          |     |_DEC
+          |       |_VAR
+          |         |_VAR
+          |         | |_r  
+          |         |_40  
+          |_EXTDEFS
+            |_EXTDEF
+            | |_SPEC
+            | | |_int  
+            | |_FUNC
+            | | |_dfs  
+            | | |_PARAS
+            | |   |_PARASF
+            | |     |_PARA
+            | |       |_SPEC
+            | |       | |_int  
+            | |       |_VAR
+            | |         |_x  
+            | |_STMTBLOCK
+            |   |_DEFS
+            |   | |_DEF
+            |   | | |_SPEC
+            |   | | | |_int  
+            |   | | |_DECS
+            |   | |   |_DEC
+            |   | |     |_VAR
+            |   | |       |_i  
+            |   | |_NULL  
+            |   |_STMTS
+            |     |_STMT
+            |     | |_if  
+            |     | |_(null)  
+            |     | |_STMT
+            |     | | |_STMTBLOCK
+            |     | |   |_NULL  
+            |     | |   |_STMTS
+            |     | |     |_STMT
+            |     | |     | |_EXP
+            |     | |     |   |_++  
+            |     | |     |   |_EXP
+            |     | |     |     |_ans  
+            |     | |     |     |_NULL  
+            |     | |     |_STMTS
+            |     | |       |_STMT
+            |     | |       | |_return  
+            |     | |       | |_EXP
+            |     | |       |   |_0  
+            |     | |       |_NULL  
+            |     | |_NULL  
+            |     |_STMTS
+            |       |_STMT
+            |       | |_for  
+            |       | |_Fexp
+            |       | | |_EXP
+            |       | |   |_EXP
+            |       | |   | |_i  
+            |       | |   | |_NULL  
+            |       | |   |_=  
+            |       | |   |_EXP
+            |       | |     |_0  
+            |       | |_Fexp
+            |       | | |_EXP
+            |       | |   |_EXP
+            |       | |   | |_i  
+            |       | |   | |_NULL  
+            |       | |   |_<  
+            |       | |   |_EXP
+            |       | |     |_n  
+            |       | |     |_NULL  
+            |       | |_EXP
+            |       | | |_++  
+            |       | | |_EXP
+            |       | |   |_i  
+            |       | |   |_NULL  
+            |       | |_STMT
+            |       |   |_if  
+            |       |   |_(null)  
+            |       |   |_STMT
+            |       |   | |_STMTBLOCK
+            |       |   |   |_NULL  
+            |       |   |   |_STMTS
+            |       |   |     |_STMT
+            |       |   |     | |_EXP
+            |       |   |     |   |_EXP
+            |       |   |     |   | |_b  
+            |       |   |     |   | |_ARRS
+            |       |   |     |   |   |_EXP
+            |       |   |     |   |   | |_i  
+            |       |   |     |   |   | |_NULL  
+            |       |   |     |   |   |_NULL  
+            |       |   |     |   |_=  
+            |       |   |     |   |_EXP
+            |       |   |     |     |_1  
+            |       |   |     |_STMTS
+            |       |   |       |_STMT
+            |       |   |       | |_EXP
+            |       |   |       |   |_EXP
+            |       |   |       |   | |_l  
+            |       |   |       |   | |_ARRS
+            |       |   |       |   |   |_EXP
+            |       |   |       |   |   | |_EXP
+            |       |   |       |   |   | | |_i  
+            |       |   |       |   |   | | |_NULL  
+            |       |   |       |   |   | |_+  
+            |       |   |       |   |   | |_EXP
+            |       |   |       |   |   |   |_x  
+            |       |   |       |   |   |   |_NULL  
+            |       |   |       |   |   |_NULL  
+            |       |   |       |   |_=  
+            |       |   |       |   |_EXP
+            |       |   |       |     |_1  
+            |       |   |       |_STMTS
+            |       |   |         |_STMT
+            |       |   |         | |_EXP
+            |       |   |         |   |_EXP
+            |       |   |         |   | |_r  
+            |       |   |         |   | |_ARRS
+            |       |   |         |   |   |_EXP
+            |       |   |         |   |   | |_EXP
+            |       |   |         |   |   | | |_EXP
+            |       |   |         |   |   | | | |_EXP
+            |       |   |         |   |   | | | | |_i  
+            |       |   |         |   |   | | | | |_NULL  
+            |       |   |         |   |   | | | |_-  
+            |       |   |         |   |   | | | |_EXP
+            |       |   |         |   |   | | |   |_x  
+            |       |   |         |   |   | | |   |_NULL  
+            |       |   |         |   |   | | |_+  
+            |       |   |         |   |   | | |_EXP
+            |       |   |         |   |   | |   |_n  
+            |       |   |         |   |   | |   |_NULL  
+            |       |   |         |   |   | |_-  
+            |       |   |         |   |   | |_EXP
+            |       |   |         |   |   |   |_1  
+            |       |   |         |   |   |_NULL  
+            |       |   |         |   |_=  
+            |       |   |         |   |_EXP
+            |       |   |         |     |_1  
+            |       |   |         |_STMTS
+            |       |   |           |_STMT
+            |       |   |           | |_EXP
+            |       |   |           |   |_dfs  
+            |       |   |           |   |_ARGS
+            |       |   |           |     |_EXP
+            |       |   |           |       |_EXP
+            |       |   |           |       | |_x  
+            |       |   |           |       | |_NULL  
+            |       |   |           |       |_+  
+            |       |   |           |       |_EXP
+            |       |   |           |         |_1  
+            |       |   |           |_STMTS
+            |       |   |             |_STMT
+            |       |   |             | |_EXP
+            |       |   |             |   |_EXP
+            |       |   |             |   | |_b  
+            |       |   |             |   | |_ARRS
+            |       |   |             |   |   |_EXP
+            |       |   |             |   |   | |_i  
+            |       |   |             |   |   | |_NULL  
+            |       |   |             |   |   |_NULL  
+            |       |   |             |   |_=  
+            |       |   |             |   |_EXP
+            |       |   |             |     |_0  
+            |       |   |             |_STMTS
+            |       |   |               |_STMT
+            |       |   |               | |_EXP
+            |       |   |               |   |_EXP
+            |       |   |               |   | |_l  
+            |       |   |               |   | |_ARRS
+            |       |   |               |   |   |_EXP
+            |       |   |               |   |   | |_EXP
+            |       |   |               |   |   | | |_i  
+            |       |   |               |   |   | | |_NULL  
+            |       |   |               |   |   | |_+  
+            |       |   |               |   |   | |_EXP
+            |       |   |               |   |   |   |_x  
+            |       |   |               |   |   |   |_NULL  
+            |       |   |               |   |   |_NULL  
+            |       |   |               |   |_=  
+            |       |   |               |   |_EXP
+            |       |   |               |     |_0  
+            |       |   |               |_STMTS
+            |       |   |                 |_STMT
+            |       |   |                 | |_EXP
+            |       |   |                 |   |_EXP
+            |       |   |                 |   | |_r  
+            |       |   |                 |   | |_ARRS
+            |       |   |                 |   |   |_EXP
+            |       |   |                 |   |   | |_EXP
+            |       |   |                 |   |   | | |_EXP
+            |       |   |                 |   |   | | | |_EXP
+            |       |   |                 |   |   | | | | |_i  
+            |       |   |                 |   |   | | | | |_NULL  
+            |       |   |                 |   |   | | | |_-  
+            |       |   |                 |   |   | | | |_EXP
+            |       |   |                 |   |   | | |   |_x  
+            |       |   |                 |   |   | | |   |_NULL  
+            |       |   |                 |   |   | | |_+  
+            |       |   |                 |   |   | | |_EXP
+            |       |   |                 |   |   | |   |_n  
+            |       |   |                 |   |   | |   |_NULL  
+            |       |   |                 |   |   | |_-  
+            |       |   |                 |   |   | |_EXP
+            |       |   |                 |   |   |   |_1  
+            |       |   |                 |   |   |_NULL  
+            |       |   |                 |   |_=  
+            |       |   |                 |   |_EXP
+            |       |   |                 |     |_0  
+            |       |   |                 |_NULL  
+            |       |   |_NULL  
+            |       |_STMTS
+            |         |_STMT
+            |         | |_return  
+            |         | |_EXP
+            |         |   |_0  
+            |         |_NULL  
+            |_EXTDEFS
+              |_EXTDEF
+              | |_SPEC
+              | | |_int  
+              | |_FUNC
+              | | |_main  
+              | | |_NULL  
+              | |_STMTBLOCK
+              |   |_NULL  
+              |   |_STMTS
+              |     |_STMT
+              |     | |_read  
+              |     | |_EXP
+              |     |   |_n  
+              |     |   |_NULL  
+              |     |_STMTS
+              |       |_STMT
+              |       | |_if  
+              |       | |_(null)  
+              |       | |_STMT
+              |       | | |_write  
+              |       | | |_EXP
+              |       | |   |_-  
+              |       | |   |_EXP
+              |       | |     |_1  
+              |       | |_ESTMT
+              |       |   |_else  
+              |       |   |_STMT
+              |       |     |_STMTBLOCK
+              |       |       |_NULL  
+              |       |       |_STMTS
+              |       |         |_STMT
+              |       |         | |_EXP
+              |       |         |   |_dfs  
+              |       |         |   |_ARGS
+              |       |         |     |_EXP
+              |       |         |       |_0  
+              |       |         |_STMTS
+              |       |           |_STMT
+              |       |           | |_write  
+              |       |           | |_EXP
+              |       |           |   |_ans  
+              |       |           |   |_NULL  
+              |       |           |_NULL  
+              |       |_STMTS
+              |         |_STMT
+              |         | |_return  
+              |         | |_EXP
+              |         |   |_0  
+              |         |_NULL  
+              |_NULL  
+print finished...

@@ -1,9 +1,15 @@
+/* 
+*  File name : node.h
+*  Output file: 
+*  The definition of the node type and the node.
+*
+*/
 #pragma once 
 
 #ifndef NODE_H
 #define NODE_H
 #include "includes.h"
-
+using namespace std;
 struct Node;
 typedef enum {
 	Program,
@@ -54,7 +60,7 @@ struct Node {
 		name = strdup(n);
 		size = capacity = s;
 		children = new Node*[s];
-		
+		//cout << n << endl; 
 		va_list vl;
 		va_start(vl,s);
 		for (int i = 0; i<s; ++i) {
@@ -62,10 +68,6 @@ struct Node {
 		}
 		va_end(vl);
 	}
-	bool isLeaf()
-	{
-		return size == 0;
-	}	
 };
-Node* root;
+
 #endif //NODE_H

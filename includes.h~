@@ -1,4 +1,5 @@
 //This file is the header file.
+#pragma once 
 #ifndef INCLUDES
 #define INCLUDES
 

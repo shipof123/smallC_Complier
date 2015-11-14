@@ -1,0 +1,500 @@
+PROGRAM
+|_EXTDEFS
+  |_EXTDEF
+  | |_SPEC
+  | | |_int 
+  | |_EXTVARS
+  |   |_EXTVAR
+  |     |_DEC
+  |       |_VAR
+  |       | |_VAR
+  |       | | |_mat 
+  |       | |_4 
+  |       |_= 
+  |       |_INIT
+  |         |_ARGS
+  |           |_EXP
+  |           | |_0 
+  |           |_ARGS
+  |             |_EXP
+  |             | |_1 
+  |             |_ARGS
+  |               |_EXP
+  |               | |_1 
+  |               |_ARGS
+  |                 |_EXP
+  |                   |_1 
+  |_EXTDEFS
+    |_EXTDEF
+    | |_SPEC
+    | | |_int 
+    | |_EXTVARS
+    |   |_EXTVAR
+    |     |_DEC
+    |       |_VAR
+    |         |_n 
+    |_EXTDEFS
+      |_EXTDEF
+      | |_SPEC
+      | | |_int 
+      | |_EXTVARS
+      |   |_EXTVAR
+      |     |_DEC
+      |       |_VAR
+      |       | |_MOD 
+      |       |_= 
+      |       |_INIT
+      |         |_EXP
+      |           |_10007 
+      |_EXTDEFS
+        |_EXTDEF
+        | |_SPEC
+        | | |_int 
+        | |_FUNC
+        | | |_solve 
+        | | |_PARAS
+        | |   |_PARASF
+        | |     |_PARA
+        | |       |_SPEC
+        | |       | |_int 
+        | |       |_VAR
+        | |         |_x 
+        | |_STMTBLOCK
+        |   |_DEFS
+        |   | |_DEF
+        |   | | |_SPEC
+        |   | | | |_int 
+        |   | | |_DECS
+        |   | |   |_DEC
+        |   | |   | |_VAR
+        |   | |   |   |_p 
+        |   | |   |_DECS
+        |   | |     |_DEC
+        |   | |     | |_VAR
+        |   | |     |   |_q 
+        |   | |     |_DECS
+        |   | |       |_DEC
+        |   | |       | |_VAR
+        |   | |       |   |_r 
+        |   | |       |_DECS
+        |   | |         |_DEC
+        |   | |           |_VAR
+        |   | |             |_s 
+        |   | |_DEFS
+        |   |   |_DEF
+        |   |   | |_SPEC
+        |   |   | | |_int 
+        |   |   | |_DECS
+        |   |   |   |_DEC
+        |   |   |     |_VAR
+        |   |   |     | |_VAR
+        |   |   |     | | |_ans 
+        |   |   |     | |_2 
+        |   |   |     |_= 
+        |   |   |     |_INIT
+        |   |   |       |_ARGS
+        |   |   |         |_EXP
+        |   |   |         | |_0 
+        |   |   |         |_ARGS
+        |   |   |           |_EXP
+        |   |   |             |_1 
+        |   |   |_NULL 
+        |   |_STMTS
+        |     |_STMT
+        |     | |_for 
+        |     | |_NULL 
+        |     | |_Fexp
+        |     | | |_EXP
+        |     | |   |_x 
+        |     | |   |_NULL 
+        |     | |_EXP
+        |     | | |_EXP
+        |     | | | |_x 
+        |     | | | |_NULL 
+        |     | | |_>>= 
+        |     | | |_EXP
+        |     | |   |_1 
+        |     | |_STMT
+        |     |   |_STMTBLOCK
+        |     |     |_NULL 
+        |     |     |_STMTS
+        |     |       |_STMT
+        |     |       | |_if 
+        |     |       | |_(null) 
+        |     |       | |_STMT
+        |     |       | | |_STMTBLOCK
+        |     |       | |   |_NULL 
+        |     |       | |   |_STMTS
+        |     |       | |     |_STMT
+        |     |       | |     | |_EXP
+        |     |       | |     |   |_EXP
+        |     |       | |     |   | |_p 
+        |     |       | |     |   | |_NULL 
+        |     |       | |     |   |_= 
+        |     |       | |     |   |_EXP
+        |     |       | |     |     |_EXP
+        |     |       | |     |     | |_EXP
+        |     |       | |     |     | | |_ans 
+        |     |       | |     |     | | |_ARRS
+        |     |       | |     |     | |   |_EXP
+        |     |       | |     |     | |   | |_0 
+        |     |       | |     |     | |   |_NULL 
+        |     |       | |     |     | |_* 
+        |     |       | |     |     | |_EXP
+        |     |       | |     |     |   |_mat 
+        |     |       | |     |     |   |_ARRS
+        |     |       | |     |     |     |_EXP
+        |     |       | |     |     |     | |_0 
+        |     |       | |     |     |     |_NULL 
+        |     |       | |     |     |_+ 
+        |     |       | |     |     |_EXP
+        |     |       | |     |       |_EXP
+        |     |       | |     |       | |_ans 
+        |     |       | |     |       | |_ARRS
+        |     |       | |     |       |   |_EXP
+        |     |       | |     |       |   | |_1 
+        |     |       | |     |       |   |_NULL 
+        |     |       | |     |       |_* 
+        |     |       | |     |       |_EXP
+        |     |       | |     |         |_mat 
+        |     |       | |     |         |_ARRS
+        |     |       | |     |           |_EXP
+        |     |       | |     |           | |_2 
+        |     |       | |     |           |_NULL 
+        |     |       | |     |_STMTS
+        |     |       | |       |_STMT
+        |     |       | |       | |_EXP
+        |     |       | |       |   |_EXP
+        |     |       | |       |   | |_q 
+        |     |       | |       |   | |_NULL 
+        |     |       | |       |   |_= 
+        |     |       | |       |   |_EXP
+        |     |       | |       |     |_EXP
+        |     |       | |       |     | |_EXP
+        |     |       | |       |     | | |_ans 
+        |     |       | |       |     | | |_ARRS
+        |     |       | |       |     | |   |_EXP
+        |     |       | |       |     | |   | |_0 
+        |     |       | |       |     | |   |_NULL 
+        |     |       | |       |     | |_* 
+        |     |       | |       |     | |_EXP
+        |     |       | |       |     |   |_mat 
+        |     |       | |       |     |   |_ARRS
+        |     |       | |       |     |     |_EXP
+        |     |       | |       |     |     | |_1 
+        |     |       | |       |     |     |_NULL 
+        |     |       | |       |     |_+ 
+        |     |       | |       |     |_EXP
+        |     |       | |       |       |_EXP
+        |     |       | |       |       | |_ans 
+        |     |       | |       |       | |_ARRS
+        |     |       | |       |       |   |_EXP
+        |     |       | |       |       |   | |_1 
+        |     |       | |       |       |   |_NULL 
+        |     |       | |       |       |_* 
+        |     |       | |       |       |_EXP
+        |     |       | |       |         |_mat 
+        |     |       | |       |         |_ARRS
+        |     |       | |       |           |_EXP
+        |     |       | |       |           | |_3 
+        |     |       | |       |           |_NULL 
+        |     |       | |       |_STMTS
+        |     |       | |         |_STMT
+        |     |       | |         | |_EXP
+        |     |       | |         |   |_EXP
+        |     |       | |         |   | |_ans 
+        |     |       | |         |   | |_ARRS
+        |     |       | |         |   |   |_EXP
+        |     |       | |         |   |   | |_0 
+        |     |       | |         |   |   |_NULL 
+        |     |       | |         |   |_= 
+        |     |       | |         |   |_EXP
+        |     |       | |         |     |_EXP
+        |     |       | |         |     | |_p 
+        |     |       | |         |     | |_NULL 
+        |     |       | |         |     |_% 
+        |     |       | |         |     |_EXP
+        |     |       | |         |       |_MOD 
+        |     |       | |         |       |_NULL 
+        |     |       | |         |_STMTS
+        |     |       | |           |_STMT
+        |     |       | |           | |_EXP
+        |     |       | |           |   |_EXP
+        |     |       | |           |   | |_ans 
+        |     |       | |           |   | |_ARRS
+        |     |       | |           |   |   |_EXP
+        |     |       | |           |   |   | |_1 
+        |     |       | |           |   |   |_NULL 
+        |     |       | |           |   |_= 
+        |     |       | |           |   |_EXP
+        |     |       | |           |     |_EXP
+        |     |       | |           |     | |_q 
+        |     |       | |           |     | |_NULL 
+        |     |       | |           |     |_% 
+        |     |       | |           |     |_EXP
+        |     |       | |           |       |_MOD 
+        |     |       | |           |       |_NULL 
+        |     |       | |           |_NULL 
+        |     |       | |_NULL 
+        |     |       |_STMTS
+        |     |         |_STMT
+        |     |         | |_EXP
+        |     |         |   |_EXP
+        |     |         |   | |_p 
+        |     |         |   | |_NULL 
+        |     |         |   |_= 
+        |     |         |   |_EXP
+        |     |         |     |_EXP
+        |     |         |     | |_EXP
+        |     |         |     | | |_mat 
+        |     |         |     | | |_ARRS
+        |     |         |     | |   |_EXP
+        |     |         |     | |   | |_0 
+        |     |         |     | |   |_NULL 
+        |     |         |     | |_* 
+        |     |         |     | |_EXP
+        |     |         |     |   |_mat 
+        |     |         |     |   |_ARRS
+        |     |         |     |     |_EXP
+        |     |         |     |     | |_0 
+        |     |         |     |     |_NULL 
+        |     |         |     |_+ 
+        |     |         |     |_EXP
+        |     |         |       |_EXP
+        |     |         |       | |_mat 
+        |     |         |       | |_ARRS
+        |     |         |       |   |_EXP
+        |     |         |       |   | |_1 
+        |     |         |       |   |_NULL 
+        |     |         |       |_* 
+        |     |         |       |_EXP
+        |     |         |         |_mat 
+        |     |         |         |_ARRS
+        |     |         |           |_EXP
+        |     |         |           | |_2 
+        |     |         |           |_NULL 
+        |     |         |_STMTS
+        |     |           |_STMT
+        |     |           | |_EXP
+        |     |           |   |_EXP
+        |     |           |   | |_q 
+        |     |           |   | |_NULL 
+        |     |           |   |_= 
+        |     |           |   |_EXP
+        |     |           |     |_EXP
+        |     |           |     | |_EXP
+        |     |           |     | | |_mat 
+        |     |           |     | | |_ARRS
+        |     |           |     | |   |_EXP
+        |     |           |     | |   | |_0 
+        |     |           |     | |   |_NULL 
+        |     |           |     | |_* 
+        |     |           |     | |_EXP
+        |     |           |     |   |_mat 
+        |     |           |     |   |_ARRS
+        |     |           |     |     |_EXP
+        |     |           |     |     | |_1 
+        |     |           |     |     |_NULL 
+        |     |           |     |_+ 
+        |     |           |     |_EXP
+        |     |           |       |_EXP
+        |     |           |       | |_mat 
+        |     |           |       | |_ARRS
+        |     |           |       |   |_EXP
+        |     |           |       |   | |_1 
+        |     |           |       |   |_NULL 
+        |     |           |       |_* 
+        |     |           |       |_EXP
+        |     |           |         |_mat 
+        |     |           |         |_ARRS
+        |     |           |           |_EXP
+        |     |           |           | |_3 
+        |     |           |           |_NULL 
+        |     |           |_STMTS
+        |     |             |_STMT
+        |     |             | |_EXP
+        |     |             |   |_EXP
+        |     |             |   | |_r 
+        |     |             |   | |_NULL 
+        |     |             |   |_= 
+        |     |             |   |_EXP
+        |     |             |     |_EXP
+        |     |             |     | |_EXP
+        |     |             |     | | |_mat 
+        |     |             |     | | |_ARRS
+        |     |             |     | |   |_EXP
+        |     |             |     | |   | |_2 
+        |     |             |     | |   |_NULL 
+        |     |             |     | |_* 
+        |     |             |     | |_EXP
+        |     |             |     |   |_mat 
+        |     |             |     |   |_ARRS
+        |     |             |     |     |_EXP
+        |     |             |     |     | |_0 
+        |     |             |     |     |_NULL 
+        |     |             |     |_+ 
+        |     |             |     |_EXP
+        |     |             |       |_EXP
+        |     |             |       | |_mat 
+        |     |             |       | |_ARRS
+        |     |             |       |   |_EXP
+        |     |             |       |   | |_3 
+        |     |             |       |   |_NULL 
+        |     |             |       |_* 
+        |     |             |       |_EXP
+        |     |             |         |_mat 
+        |     |             |         |_ARRS
+        |     |             |           |_EXP
+        |     |             |           | |_2 
+        |     |             |           |_NULL 
+        |     |             |_STMTS
+        |     |               |_STMT
+        |     |               | |_EXP
+        |     |               |   |_EXP
+        |     |               |   | |_s 
+        |     |               |   | |_NULL 
+        |     |               |   |_= 
+        |     |               |   |_EXP
+        |     |               |     |_EXP
+        |     |               |     | |_EXP
+        |     |               |     | | |_mat 
+        |     |               |     | | |_ARRS
+        |     |               |     | |   |_EXP
+        |     |               |     | |   | |_1 
+        |     |               |     | |   |_NULL 
+        |     |               |     | |_* 
+        |     |               |     | |_EXP
+        |     |               |     |   |_mat 
+        |     |               |     |   |_ARRS
+        |     |               |     |     |_EXP
+        |     |               |     |     | |_2 
+        |     |               |     |     |_NULL 
+        |     |               |     |_+ 
+        |     |               |     |_EXP
+        |     |               |       |_EXP
+        |     |               |       | |_mat 
+        |     |               |       | |_ARRS
+        |     |               |       |   |_EXP
+        |     |               |       |   | |_3 
+        |     |               |       |   |_NULL 
+        |     |               |       |_* 
+        |     |               |       |_EXP
+        |     |               |         |_mat 
+        |     |               |         |_ARRS
+        |     |               |           |_EXP
+        |     |               |           | |_3 
+        |     |               |           |_NULL 
+        |     |               |_STMTS
+        |     |                 |_STMT
+        |     |                 | |_EXP
+        |     |                 |   |_EXP
+        |     |                 |   | |_mat 
+        |     |                 |   | |_ARRS
+        |     |                 |   |   |_EXP
+        |     |                 |   |   | |_0 
+        |     |                 |   |   |_NULL 
+        |     |                 |   |_= 
+        |     |                 |   |_EXP
+        |     |                 |     |_EXP
+        |     |                 |     | |_p 
+        |     |                 |     | |_NULL 
+        |     |                 |     |_% 
+        |     |                 |     |_EXP
+        |     |                 |       |_MOD 
+        |     |                 |       |_NULL 
+        |     |                 |_STMTS
+        |     |                   |_STMT
+        |     |                   | |_EXP
+        |     |                   |   |_EXP
+        |     |                   |   | |_mat 
+        |     |                   |   | |_ARRS
+        |     |                   |   |   |_EXP
+        |     |                   |   |   | |_1 
+        |     |                   |   |   |_NULL 
+        |     |                   |   |_= 
+        |     |                   |   |_EXP
+        |     |                   |     |_EXP
+        |     |                   |     | |_q 
+        |     |                   |     | |_NULL 
+        |     |                   |     |_% 
+        |     |                   |     |_EXP
+        |     |                   |       |_MOD 
+        |     |                   |       |_NULL 
+        |     |                   |_STMTS
+        |     |                     |_STMT
+        |     |                     | |_EXP
+        |     |                     |   |_EXP
+        |     |                     |   | |_mat 
+        |     |                     |   | |_ARRS
+        |     |                     |   |   |_EXP
+        |     |                     |   |   | |_2 
+        |     |                     |   |   |_NULL 
+        |     |                     |   |_= 
+        |     |                     |   |_EXP
+        |     |                     |     |_EXP
+        |     |                     |     | |_r 
+        |     |                     |     | |_NULL 
+        |     |                     |     |_% 
+        |     |                     |     |_EXP
+        |     |                     |       |_MOD 
+        |     |                     |       |_NULL 
+        |     |                     |_STMTS
+        |     |                       |_STMT
+        |     |                       | |_EXP
+        |     |                       |   |_EXP
+        |     |                       |   | |_mat 
+        |     |                       |   | |_ARRS
+        |     |                       |   |   |_EXP
+        |     |                       |   |   | |_3 
+        |     |                       |   |   |_NULL 
+        |     |                       |   |_= 
+        |     |                       |   |_EXP
+        |     |                       |     |_EXP
+        |     |                       |     | |_s 
+        |     |                       |     | |_NULL 
+        |     |                       |     |_% 
+        |     |                       |     |_EXP
+        |     |                       |       |_MOD 
+        |     |                       |       |_NULL 
+        |     |                       |_NULL 
+        |     |_STMTS
+        |       |_STMT
+        |       | |_return 
+        |       | |_EXP
+        |       |   |_ans 
+        |       |   |_ARRS
+        |       |     |_EXP
+        |       |     | |_0 
+        |       |     |_NULL 
+        |       |_NULL 
+        |_EXTDEFS
+          |_EXTDEF
+          | |_SPEC
+          | | |_int 
+          | |_FUNC
+          | | |_main 
+          | | |_NULL 
+          | |_STMTBLOCK
+          |   |_NULL 
+          |   |_STMTS
+          |     |_STMT
+          |     | |_read 
+          |     | |_EXP
+          |     |   |_n 
+          |     |   |_NULL 
+          |     |_STMTS
+          |       |_STMT
+          |       | |_write 
+          |       | |_EXP
+          |       |   |_solve 
+          |       |   |_ARGS
+          |       |     |_EXP
+          |       |       |_n 
+          |       |       |_NULL 
+          |       |_STMTS
+          |         |_STMT
+          |         | |_return 
+          |         | |_EXP
+          |         |   |_0 
+          |         |_NULL 
+          |_NULL 
