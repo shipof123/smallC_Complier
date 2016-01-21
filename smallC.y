@@ -10,10 +10,12 @@
 #include "includes.h"
 #include "ast.h"
 #include "lex.yy.c"
-
+#include "semantic.h"
+#include "llvm.h"
 using namespace std;
 
 void yyerror(const char *s);
+extern void trans_Program(Node* root);
 extern int yylex(void);
 extern int yylineno; // get the line number
 extern char* yytext; // get the token
@@ -28,6 +30,7 @@ Node* root;
 %type <node> STMTBLOCK STMTS STMT ESTMT DEFS DEF DECS DEC INIT FEXP EXP ARRS ARGS
 
 %token <string> INT 
+%token <string> NEGINT
 %token <string> ID
 %token SEMI COMMA
 %token <string> TYPE
@@ -102,12 +105,10 @@ STMTS		: STMT STMTS			{$$ = new Node(yylineno, Stmts, "STMTS", 2, $1, $2);}
 STMT		: EXP SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, $1);}	
 		| STMTBLOCK			{$$ = new Node(yylineno, Stmt, "STMT", 1, $1);}
 		| RETURN EXP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
-		| IF LP EXP RP STMT ESTMT	{$$ = new Node(yylineno, Stmt, "STMT", 4, new Node(yylineno, Keyword, $1, 0), $2, $5, $6);}
-		| FOR LP FEXP SEMI FEXP SEMI EXP RP STMT 	{$$ = new Node(yylineno, Stmt, "STMT", 5, new Node(yylineno, Keyword, $1, 0), $3, $5, $7, $9);}
+		| IF LP EXP RP STMT ESTMT	{$$ = new Node(yylineno, Stmt, "STMT", 4, new Node(yylineno, Keyword, $1, 0), $3, $5, $6);}
+		| FOR LP FEXP SEMI FEXP SEMI FEXP RP STMT 	{$$ = new Node(yylineno, Stmt, "STMT", 5, new Node(yylineno, Keyword, $1, 0), $3, $5, $7, $9);}
 		| CONT SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, $1, 0));}
 		| BREAK SEMI			{$$ = new Node(yylineno, Stmt, "STMT", 1, new Node(yylineno, Keyword, $1, 0));}
-		| READ LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
-		| WRITE LP EXP RP SEMI		{$$ = new Node(yylineno, Stmt, "STMT", 2, new Node(yylineno, Keyword, $1, 0), $3);}
 		;
 ESTMT		: ELSE STMT %prec ELSE		{$$ = new Node(yylineno, Estmt, "ESTMT", 2, new Node(yylineno, Keyword, $1, 0), $2);}
 		| /* empty */%prec LOWER_ELSE	{$$ = new Node(yylineno, Null, "NULL", 0);}
@@ -168,12 +169,16 @@ EXP 		: EXP MUL EXP			{$$ = new Node(yylineno, Exp, "EXP", 3, $1, new Node(yylin
 		| ID ARRS			{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Id, $1, 0), $2);}
 		| EXP DOT ID			{$$ = new Node(yylineno, Exp, "EXP", 3, $1, new Node(yylineno, Operator, $2, 0), new Node(yylineno, Id, $3, 0));}
 		| INT				{$$ = new Node(yylineno, Exp, "EXP", 1, new Node(yylineno, Int, $1, 0));}
+		| READ LP EXP RP		{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Keyword, $1, 0), $3);}
+		| WRITE LP EXP RP		{$$ = new Node(yylineno, Exp, "EXP", 2, new Node(yylineno, Keyword, $1, 0), $3);}
+		| NEGINT			{$$ = new Node(yylineno, Exp, "EXP", 1, new Node(yylineno, Nint, $1, 0));}
+		| EXP NEGINT 			{$$ = new Node(yylineno, Exp, "EXP", 2, $1, new Node(yylineno, Nint, $2, 0));}
 		;
 ARRS 		: LB EXP RB ARRS		{$$ = new Node(yylineno, Arrs, "ARRS", 2, $2, $4);}
 		| /* empty */			{$$ = new Node(yylineno, Null, "NULL", 0);}
 		;
 ARGS		: EXP COMMA ARGS		{$$ = new Node(yylineno, Args, "ARGS", 2, $1, $3);}
-		| EXP				{$$ = new Node(yylineno, Args, "ARGS", 1, $1);}
+		| FEXP				{$$ = new Node(yylineno, Args, "ARGS", 1, $1);}
 		; 
 %%
 void yyerror(const char *s) {
@@ -191,7 +196,8 @@ int main(int argc, char** argv) {
 	freopen(argv[2], "w+", stdout);
 	if(!yyparse())
 	{
-		print_ast(root, 0);
+		//print_ast(root, 0);
+		trans_Program(root);
 		//cout << argv[1] <<"---" << argv[2] <<endl;
 	}
 	else

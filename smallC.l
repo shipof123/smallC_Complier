@@ -38,7 +38,10 @@ for			{yylval.string = strdup(yytext);return FOR;}
 int 			{yylval.string = strdup(yytext);return TYPE;} // ONLY int
 0[xX][0-9a-fA-F]+ 	{yylval.string = strdup(yytext);return INT;} // hex integer
 0[0-7]*			{yylval.string = strdup(yytext);return INT;} // oct integer 
-[1-9][0-9]* 		{yylval.string = strdup(yytext);return INT;} // comman integer  
+[1-9][0-9]* 		{yylval.string = strdup(yytext);return INT;} // comman integer
+-0[xX][0-9a-fA-F]+ 	{yylval.string = strdup(yytext);return NEGINT;} // hex integer
+-0[0-7]*		{yylval.string = strdup(yytext);return NEGINT;} // oct integer 
+-[1-9][0-9]* 		{yylval.string = strdup(yytext);return NEGINT;} // comman integer    
 [a-zA-Z_][a-zA-Z0-9_]*	{yylval.string = strdup(yytext);return ID;}
 
 

@@ -6,7 +6,6 @@ y.tab.o:y.tab.c node.h includes.h
 	g++ -c y.tab.c 
 y.tab.c y.tab.h:smallC.y node.h includes.h
 	yacc smallC.y -v -d
-
 lex.yy.c:
 	flex smallC.l
 clean:

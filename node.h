@@ -42,6 +42,7 @@ typedef enum {
 	UnaryOp,
 	Operator,
 	Int,
+	Nint,
 	Type,
 	Id,
 	Keyword 
