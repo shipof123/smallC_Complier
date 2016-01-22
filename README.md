@@ -1,13 +1,13 @@
-|File name|Content|
-|:---|:---|
-|/Report|Report foler|
-|/test_results |folder test results for all test cases.|
-| ast.h | for print the AST  |
-| includes.h | common head file for all others |
-| Makefile | makefile for project 1|
-| node.h | definition for tree node and types of tree node |
-| README.md | list all files contained |
-| smallC.l | lex file |
-| smallC.y | yacc file |
-| test.sc | a test small C file contains errors |
-| README.html | html for REAMME.md in case you don't have a markdown Reader |
+/tests			folder test cases 
+/testout		folder test cases output
+test.sh			test all cases with shell command " bash test.sh"
+includes.h 		common head file for all others
+Makefile 		makefile
+node.h 			definition for tree node and types of tree node 
+README.md 		list all files contained
+smallC.l 		lex file 
+smallC.y   		yacc file 
+llvm.h			part for generate LLVM IR code
+ast.h			for print the AST tree in project 1
+semantic.h		semantic analysis
+report.pdf		final report

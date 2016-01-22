@@ -1,27 +1,33 @@
+/*******************************************************************************************
+* File: llvm.h
+* entrance: trans_Program(Node*)
+* Generating LLVM IR assembly code in after the traverse
+*
+********************************************************************************************/
+
 #ifndef LLVM_H
 #define LLVM_H
 
 #include "includes.h"
-//#include "llvm.h"
 int numStructMember = 0;
 char* structName;
 
 struct symbol
 {
-	char* word;
-	int type;
-	char* arrSize;
-	char* structName;
-	int   numStructMem;
+	char* word; // name for id
+	int type;   // to determine '%' or '@'
+	char* arrSize; // store the size of the array for translation
+	char* structName; // stspec name
+	int   numStructMem; // size of the struct, 
 };
 struct symbol* symTable[27][40]={0};
 
 int regNum, callNum, ifNum, forNum, arridxNum; //for register allocation
 int paraFlag = 0; //paremetres flag
-int paraPoint = 0; //parameters point
+int paraSize = 0; //parameters point
 char* paraArr[10]; //parametres array
 int entryDepth = 0; //depth of stmtblocks
-int loadFlag = 1; //load or not?
+int loadFlag = 1; //load or not for left value expression
 char* arrName; //array Name
 char* arrSize; //array size
 
@@ -56,7 +62,7 @@ void trans_Stmts(Node* rt);
 void trans_Stmt(Node* rt);
 char* trans_Exp(Node* rt);
 void trans_ArgsFunc(Node* rt);
-
+/* help function for symbol table */
 int getDim(char ch)
 {
 	int dim = ch-'a';
@@ -64,6 +70,7 @@ int getDim(char ch)
         if (ch=='_') dim = 26;
 	return dim;
 }
+/* entrance of the traverse*/
 void trans_Program(Node* root)
 {  
 	printf("@.str = private unnamed_addr constant [3 x i8] c\"%%d\\00\", align 1\n");
@@ -74,7 +81,7 @@ void trans_Program(Node* root)
     	printf("\ndeclare i32 @__isoc99_scanf(i8*, ...) #1\n");
     	printf("declare i32 @printf(i8*, ...) #1\n");
 }
-
+/* for extdefs*/
 void trans_Extdefs(Node* root)
 {
 	if(root->size == 2)
@@ -83,7 +90,7 @@ void trans_Extdefs(Node* root)
 		trans_Extdefs(root->children[1]);
 	}
 }
-
+/* for extdef, namely two kinds, function or not, if it is a spec, determine it is type or not*/
 void trans_Extdef(Node* rt)
 {
 	if(rt->children[1]->node_type != Func) // SPEC EXTVARS SEMI
@@ -105,7 +112,7 @@ void trans_Extdef(Node* rt)
 		trans_Stmtblock(rt->children[2]);
 	}
 }
-
+/* for extdef with struct, two kinds, one is only id, the other is need for initialization*/
 void trans_ExtvarsStruct(Node* rt) // rt -> Extdef
 {
 	Node* tmp = rt->children[0]->children[0]; // STSPEC
@@ -118,22 +125,21 @@ void trans_ExtvarsStruct(Node* rt) // rt -> Extdef
 		trans_ExtdefStructOpttag(tmp);
 	}
 }
-		
+/* for extdef, with external struct initilizaiton*/
 void trans_ExtdefStructOpttag(Node* rt) // Struct opttag lc defs rc, rt->STSPEC
 {
 	// opttag must be id at this time
 	Node* id_node = rt->children[1]->children[0];
 	char* tmp = new char[200];
-	//int len = strlen(id_node->name);
 	strcpy(tmp,id_node->name);
 	
 	printf("%%struct.%s = type { ", tmp);	
 	trans_DefsStructOpttag(rt->children[2]);
 	printf(" }\n");
 	
-	numStructMember = 0;	//clear number of struct members
+	numStructMember = 0;	//clear number of struct members, needed for later translation for others
 }
-
+/* for defs with members*/
 void trans_DefsStructOpttag(Node* rt) // rt-> Defs
 {
 	if(rt->size == 2) // DEF DEFS
@@ -147,7 +153,7 @@ void trans_DefsStructOpttag(Node* rt) // rt-> Defs
 		}
 	}
 }
-
+/* for def with id, store id in symbol table*/
 void trans_DefStructOpttag(Node* rt) // rt-> Def
 {
 	// definitions inside the struct can only be int variables
@@ -168,7 +174,7 @@ void trans_DefStructOpttag(Node* rt) // rt-> Def
 
 	printf("i32");
 }
-
+/* for extdef with struct id, store id in symbol table*/
 void trans_ExtdefStructId(Node* rt) // struct id, rt->Extdef
 {
 	Node* nodeId = rt->children[0]->children[0]->children[1]; // ID
@@ -179,13 +185,13 @@ void trans_ExtdefStructId(Node* rt) // struct id, rt->Extdef
 	
 	free(structName);
 }
-
+/* for extvars with struct id, store id in symbol table*/
 void trans_ExtvarsStructId(Node* rt) // rt->Extvars
 {
 	if(rt->node_type == Null) return;
 	trans_ExtvarStructId(rt->children[0]);
 }
-
+/* for extvar with struct id*/
 void trans_ExtvarStructId(Node* rt) // rt->Extvar
 {
 	if(rt->size == 2) //DEC COMMA EXTVAR
@@ -198,7 +204,7 @@ void trans_ExtvarStructId(Node* rt) // rt->Extvar
 		trans_DecStructId(rt->children[0]);
 	}	
 }
-
+/* for decs with struct id, find id in symbol table*/
 void trans_DecStructId(Node* rt) // rt-> Dec
 {
 	Node* nodeId = rt->children[0]->children[0];
@@ -219,14 +225,13 @@ void trans_DecStructId(Node* rt) // rt-> Dec
 	printf("@%s",tmp);
 	printf(" = common global %%struct.%s zeroinitializer, align 4\n",structName);
 }
-
-
+/* for extvars with type*/
 void trans_ExtvarsType(Node* rt) // rt->Extvars, spec->id case
 {
 	if(rt->node_type == Null) return;
 	trans_ExtvarType(rt->children[0]);
 }
-
+/* for extvar with type*/
 void trans_ExtvarType(Node* rt)
 {
 	if(rt->size == 2) // DEC COMMA EXTVAR
@@ -239,10 +244,9 @@ void trans_ExtvarType(Node* rt)
 		trans_DecExt(rt->children[0]);
 	}
 }
-
+/* for exteral declarations with four cases*/
 void trans_DecExt(Node* rt) // rt->Dec
 {
-//--------------------------------------------------------------------------//TO-DO
 	// DEC=> VAR
 	//    => VAR ASSIGNOP INIT
 	if(rt->size == 1) //var
@@ -355,7 +359,7 @@ void trans_DecExt(Node* rt) // rt->Dec
 		}
 	}
 }
-
+/* for exteral args*/
 void trans_ArgsExt(Node* rt) // args outsize, 1,2,3,4 case, can not be NULL, can not be not the same initializer
 {
 	if (rt->size == 1) //FEXP
@@ -382,7 +386,7 @@ void trans_ArgsExt(Node* rt) // args outsize, 1,2,3,4 case, can not be NULL, can
         	trans_ArgsExt(rt->children[1]);
 	}
 }
-
+/* for function*/
 void trans_Func(Node* rt) // rt->Func
 {
 //	regNum = callNum = ifNum = forNum = arridxNum = 0; // CLEAR for function
@@ -405,7 +409,7 @@ void trans_Func(Node* rt) // rt->Func
 	}
 	printf(") #0\n");
 }
-
+/* for parasf*/
 void trans_Parasf(Node* rt) // rt->parasf
 {
 	if(rt->size == 2) // para comma parasf
@@ -419,6 +423,7 @@ void trans_Parasf(Node* rt) // rt->parasf
 		trans_Para(rt->children[0]);
 	}
 }
+/* for Para, store the id in symbol table and store the paraArr, paraSize*/
 void trans_Para(Node* rt) // rt->para
 {
 	// spec var
@@ -439,11 +444,11 @@ void trans_Para(Node* rt) // rt->para
 	printf("i32 %%");
 	printf("%s",tmp);
 
-	paraArr[paraPoint] = (char*)malloc(sizeof(char)*60);
-	strcpy(paraArr[paraPoint],tmp);
-	paraPoint++;
+	paraArr[paraSize] = (char*)malloc(sizeof(char)*60);
+	strcpy(paraArr[paraSize],tmp);
+	paraSize++;
 }
-
+/* for stmtblock*/
 void trans_Stmtblock(Node* rt) // rt->Stmtblock
 {
 	// entryDepth for whether print "{"
@@ -466,7 +471,7 @@ void trans_Stmtblock(Node* rt) // rt->Stmtblock
             		i++;
         	}
         	paraFlag = 0;
-        	paraPoint = 0;
+        	paraSize = 0;
     	}
 	trans_Defs(rt->children[0]);
 	trans_Stmts(rt->children[1]);
@@ -477,6 +482,7 @@ void trans_Stmtblock(Node* rt) // rt->Stmtblock
 	}
 }
 
+/* for translation of defs*/
 void trans_Defs(Node* rt) // rt->Defs
 {
 	if(rt->node_type == Null) return;
@@ -484,6 +490,7 @@ void trans_Defs(Node* rt) // rt->Defs
 	trans_Defs(rt->children[1]);
 }
 
+/* for translation of def*/
 void trans_Def(Node* rt) //rt->Def
 {
 	// spec decs semi
@@ -491,6 +498,7 @@ void trans_Def(Node* rt) //rt->Def
 	// deal with spec with type case is enough
 }
 
+/* for translation of decs, use dec inner to differ from decext*/
 void trans_Decs(Node* rt)
 {
 	if(rt->size == 1)
@@ -504,6 +512,7 @@ void trans_Decs(Node* rt)
 	}
 }
 
+/* for translation of dec, four cases*/
 void trans_DecInner(Node* rt)
 {
 	if(rt->size == 1) // VAR
@@ -632,7 +641,7 @@ void trans_DecInner(Node* rt)
 		}
 	}
 }
-
+/* for translation of args innner*/
 void trans_ArgsInner(Node* rt) // rt-> args
 {
 	if(rt->size == 1) // exp case
@@ -653,14 +662,14 @@ void trans_ArgsInner(Node* rt) // rt-> args
 		trans_ArgsInner(rt->children[1]);
 	}
 }
-
+/* for translation of stmts*/
 void trans_Stmts(Node* rt) // rt->Stmts
 {
 	if(rt->size == 0) return;
 	trans_Stmt(rt->children[0]);
 	trans_Stmts(rt->children[1]);
 }
-
+/* for translation of stmt*/
 void trans_Stmt(Node* rt)
 {
 	if(rt->children[0]->node_type == Stmtblock) // Stmtblock case
@@ -689,20 +698,6 @@ void trans_Stmt(Node* rt)
 	}
 	else if(strcmp(rt->children[0]->name, "if") == 0) // if
 	{
-		 /*
-        	br i1 %cmp, label %if.then, label %if.else
-
-        	if.then:                                          ; preds = %entry
-        	store i32 1, i32* %a, align 4
-        	br label %if.end
-
-        	if.else:                                          ; preds = %entry
-        	store i32 2, i32* %a, align 4
-        	br label %if.end
-
-       		if.end:                                           ; preds = %if.else, %if.then
-        	store i32 3, i32* %a, align 4
-        	*/
 		if(rt->children[3]->size != 0) // ESTMT is not NULL
 		{
 			// IF LP EXP RP STMT ESTMT
@@ -776,7 +771,6 @@ void trans_Stmt(Node* rt)
 		char* tmp = (char*)malloc(sizeof(char)*60);
         	tmp = trans_Exp(rt->children[2]->children[0]);
 		
-		//EXP->iNT will crash here!
 		// consider FEXP-> NULL case
        		if (rt->children[2]->children[0]->size == 2 && \
 		   (rt->children[2]->children[0]->children[1]->node_type == Arrs||rt->children[2]->children[0]->children[1]->node_type == Null)) // ID ARRS
@@ -801,16 +795,9 @@ void trans_Stmt(Node* rt)
 
         	forNum++;
 	}
-	else if(strcmp(rt->children[0]->name, "continue") == 0) // continue
-	{
-		// ------------------- // TO-DO
-	}
-	else if(strcmp(rt->children[0]->name, "break") == 0) // break
-	{
-		// ------------------- // TO-DO		
-	}
 }
 
+/* for translation of expression*/
 char* trans_Exp(Node* rt)
 {
 
@@ -1001,9 +988,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(strcmp(rt->children[0]->name, "++") == 0) // ++ EXP
 	{
-		//%27 = load i32* %i, align 4
-        	//%inc26 = add nsw i32 %27, 1
-		//store i32 %inc26, i32* %i, align 4
 		char* op = (char*)malloc(sizeof(char)*60);
 		loadFlag = 0;
 		op = trans_Exp(rt->children[1]);
@@ -1018,9 +1002,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(strcmp(rt->children[0]->name, "-") == 0) // - , UMINUS
 	{
-		//%27 = load i32* %i, align 4
-		//%inc26 = add nsw i32 %27, 1
-		//store i32 %inc26, i32* %i, align 4
 		char* op = (char*)malloc(sizeof(char)*60);
 		loadFlag = 0;
 		op = trans_Exp(rt->children[1]);
@@ -1041,7 +1022,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(strcmp(rt->children[0]->name, "!") == 0) // !, lognoot
 	{
-		//%tobool = icmp eq i32 %0, 0
 		char* op = (char*)malloc(sizeof(char)*60);
 		op = trans_Exp(rt->children[1]);
 
@@ -1086,9 +1066,8 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, ".") == 0) // a.b
 	{
-		//%0 = load i32* getelementptr inbounds (%struct.doubleO* @T, i32 0, i32 0), align 4
-		Node* nodeId = rt->children[0]->children[0]; // EXP=>ID
 		char* tmp = (char*)malloc(sizeof(char)*200);
+		Node* nodeId = rt->children[0]->children[0];
 		strcpy(tmp, nodeId->name);
 
 		int index = getDim(tmp[0]);
@@ -1147,7 +1126,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, "==") == 0) // a == b
 	{
-		//%cmp = icmp eq i32 %0, %1
 		char* op1 = (char*)malloc(sizeof(char)*60);
 		op1 = trans_Exp(rt->children[0]);
 		char* op2 = (char*)malloc(sizeof(char)*60);
@@ -1164,7 +1142,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, "!=") == 0) // a == b
 	{
-		//%cmp = icmp eq i32 %0, %1
 		char* op1 = (char*)malloc(sizeof(char)*60);
 		op1 = trans_Exp(rt->children[0]);
 		char* op2 = (char*)malloc(sizeof(char)*60);
@@ -1181,7 +1158,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, ">") == 0) // a > b
 	{
-		 //%cmp = icmp sgt i32 %0, 16
         	char* op1 = (char*)malloc(sizeof(char)*60);
         	op1 = trans_Exp(rt->children[0]);
         	char* op2 = (char*)malloc(sizeof(char)*60);
@@ -1246,7 +1222,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, "&&") == 0) // a&&b
 	{
-		//%cmp = icmp eq i32 %0, %1
 		char* op1 = (char*)malloc(sizeof(char)*60);
 		op1 = trans_Exp(rt->children[0]);
 		char* op2 = (char*)malloc(sizeof(char)*60);
@@ -1269,7 +1244,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, "+") == 0) // a+b
 	{
-		//%add = add nsw i32 %0, %1
 		char* op1 = (char*)malloc(sizeof(char)*60);
 		op1 = trans_Exp(rt->children[0]);
 		char* op2 = (char*)malloc(sizeof(char)*60);
@@ -1371,9 +1345,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 3 && strcmp(rt->children[1]->name, ">>=") == 0) // a >>= b
 	{		
-		//%0 = load i32* %x, align 4
-		//%shr = ashr i32 %0, 1
-		//store i32 %shr, i32* %x, align 4
 		char* op1 = (char*)malloc(sizeof(char)*60);
 		loadFlag = 0;
 		op1 = trans_Exp(rt->children[0]);
@@ -1389,9 +1360,6 @@ char* trans_Exp(Node* rt)
 	}
 	else if(rt->size == 2 && rt->children[1]->node_type == Args) // id (args)
 	{
-		//%0 = load i32* @a, align 4
-		//%1 = load i32* @b, align 4
-		//%call2 = call i32 @gcd(i32 %0, i32 %1)
 		trans_ArgsFunc(rt->children[1]);
 
 		char num[10];
@@ -1406,16 +1374,16 @@ char* trans_Exp(Node* rt)
 
 		printf("  %s = call i32 @%s(",tmpReg,funcName);
 		int i;		
-		for (i=0;i<paraPoint-1;i++)
+		for (i=0;i<paraSize-1;i++)
 		{
 		    printf("i32 %s, ",paraArr[i]);
 		    free(paraArr[i]);
 		}
-		if (paraPoint>0)
+		if (paraSize>0)
 		{
-		    printf("i32 %s",paraArr[paraPoint-1]);
+		    printf("i32 %s",paraArr[paraSize-1]);
 		    free(paraArr[i]);
-		    paraPoint = 0;
+		    paraSize = 0;
 		}
 		printf(")\n");
 
@@ -1427,7 +1395,7 @@ char* trans_Exp(Node* rt)
 	}
 
 }
-
+/* translation of args for function, use para*/
 void trans_ArgsFunc(Node* rt) // args for func
 {
 	if (rt->size == 1) //FEXP
@@ -1442,17 +1410,17 @@ void trans_ArgsFunc(Node* rt) // args for func
 			tmp = trans_Exp(rt->children[0]->children[0]);
 		}
 		
-		paraArr[paraPoint] = (char*)malloc(sizeof(char)*60);
-		strcpy(paraArr[paraPoint],tmp);
-		paraPoint++;
+		paraArr[paraSize] = (char*)malloc(sizeof(char)*60);
+		strcpy(paraArr[paraSize],tmp);
+		paraSize++;
 	}
 	else //EXP COMMA ARGS
 	{
 		char* tmp = (char*)malloc(sizeof(char)*60);
 		tmp = trans_Exp(rt->children[0]);
-		paraArr[paraPoint] = (char*)malloc(sizeof(char)*60);
-		strcpy(paraArr[paraPoint],tmp);
-		paraPoint++;
+		paraArr[paraSize] = (char*)malloc(sizeof(char)*60);
+		strcpy(paraArr[paraSize],tmp);
+		paraSize++;
 
 		trans_ArgsFunc(rt->children[1]);
 	}

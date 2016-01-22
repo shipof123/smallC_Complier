@@ -1,9 +1,9 @@
-/* 
+/***********************************************
 *  File name : node.h
 *  Output file: 
 *  The definition of the node type and the node.
 *
-*/
+************************************************/
 #pragma once 
 
 #ifndef NODE_H

@@ -197,6 +197,7 @@ int main(int argc, char** argv) {
 	if(!yyparse())
 	{
 		//print_ast(root, 0);
+		//semantics(root);
 		trans_Program(root);
 		//cout << argv[1] <<"---" << argv[2] <<endl;
 	}

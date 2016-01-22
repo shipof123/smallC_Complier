@@ -3,7 +3,8 @@
 / Filename : smallC.l
 / Output File : lex.yy.c
 / @author : Shen Bingyu
-/ @date : 2015.11.1	
+/ @date : 2016.01.12	
+/ add negint case
 */
 
 #include "includes.h"

@@ -1,9 +1,9 @@
-/* 
+/*************************************
 *  File name : ast.h
 *  Output file: 
 *  Head file for printing the AST.
 *
-*/
+**************************************/
 
 #ifndef AST_H
 #define AST_H
