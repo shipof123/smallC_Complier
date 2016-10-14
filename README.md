@@ -9,44 +9,46 @@ Using **Flex**, **Bison** and **LLVM**
 
 ## Structure
 
-- **lex.l**       	Lexical Analyzer
-- **parser.y**     	Syntax Analyzer
-- **Node.h**      	Node declaration
-- **Node.cpp**     Node implement
--  **syntax_tree.h** Tree structure and IR gen declaration
--   **syntax_tree.cpp** Tree structure and IR gen implement
-- **Makefile**    	`make` to easy compile the compiler, and `make clean` to delete useless files
-- **quick-test.sh** 	shell script for easy test, test input is based on 7 given testcases, output is llvm IR code in `testcase-output-IR`
+- /tests			folder test cases 
+- /testout		folder test cases output
+- test.sh			test all cases with shell command " bash test.sh"
+- includes.h 		common head file for all others
+- Makefile 		makefile
+- node.h 			definition for tree node and types of tree node 
+- README.md 		list all files contained
+- smallC.l 		lex file 
+- smallC.y   		yacc file 
+- llvm.h			part for generate LLVM IR code
+- ast.h			for print the AST tree in project 1
+- semantic.h		semantic analysis
+- report.pdf		final report
 
 ## Usage
 
 ### 1.Quick test with testcase using scripts
 
 ```
-$ chmod +x quick-test.sh
-$ ./quick-test.sh
+./test.sh
 ```
 Detail of the shell script is:
 ```
-$ make;
-$ ./scc testcase-input/arth/arth.sc  			  	testcase-output-IR/arth.ll
-$ ./scc testcase-input/fib/fib.sc  				testcase-output-IR/fib.ll
-$ ./scc testcase-input/gcd/gcd.sc                 testcase-output-IR/gcd.ll
-$ ./scc testcase-input/io/io.sc          		  	testcase-output-IR/io.ll
-$ ./scc testcase-input/if/if.sc                   testcase-output-IR/if.ll
-$ ./scc testcase-input/queen/queen.sc             testcase-output-IR/queen.ll
-$ ./scc testcase-input/struct/struct.sc           testcase-output-IR/struct.ll
-$ make clean;
+rm testcase-output/*;
+make clean;
+make;
+./scc tests/arth.sc  			  testout/arth.ll
+./scc tests/fib.sc  			  testout/fib.ll
+./scc tests/gcd.sc                 	  testout/gcd.ll
+./scc tests/io.sc          		  testout/io.ll
+./scc tests/if.sc                         testout/if.ll
+./scc tests/queen.sc             	  testout/queen.ll
+./scc tests/struct.sc           	  testout/struct.ll
+make clean;
 ```
 
-All the testcase output will be saved at `testcase-output-IR`.
+All the testcase output will be saved at `testcase-output`.
 Then you're free to use llvm runtime to excute IR codes. For example:
 ```
 $ lli arth.ll
-```
-**ATTENSION!**  As llvm IR syntax rules changes with version.  My code generation is based on **llvm 3.5**. I've test that **llvm-3.7** or higher does not support the current IR code. Thus,  you may need to run:
-```
-$ lli-3.5 arth.ll
 ```
 
 ### 2.Run test manually
