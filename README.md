@@ -82,7 +82,7 @@ If there is a syntax error, the compiler will return which line and what input c
 For example:
 ```
 Input:
-int mian(
+int main(
 }
 
 Output
